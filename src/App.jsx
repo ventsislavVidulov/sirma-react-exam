@@ -1,12 +1,24 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import moviesService from './services/moviesService';
+import rolesService from './services/rolesService';
+import actorsService from './services/actorsService';
+import { getTheActorsThatActedToghetherInMostMovies } from './utils/getTheActorsThatActedToghetherInmostMovies';
 
 function App() {
   const [count, setCount] = useState(0);
-  moviesService.getAll();
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const loadMovies = async () => {
+      await getTheActorsThatActedToghetherInMostMovies();
+      const allMovies = await moviesService.getAll();
+      setMovies(allMovies)
+    }
+    loadMovies();
+  }, [])
 
   return (
     <>

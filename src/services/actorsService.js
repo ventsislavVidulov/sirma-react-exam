@@ -12,10 +12,14 @@ export default {
         const actor = (await this.getAll()).find(a => a.ID = actorId);
 
         if (actor) {
-            return {...actor}; //returns new reference to avoid mutations
+            return { ...actor }; //returns new reference to avoid mutations
         } else {
             console.log('No actor found with this id');
             return 'No movie actor with this id';
         }
-    }
+    },
+
+    async getTheActorsWhoActedTogetherInMostMovies() {
+
+    },
 }
