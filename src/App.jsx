@@ -2,18 +2,11 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { CSVReaderAsync } from './utils/CSVParser';
-import { mapCSVToObject } from './utils/objectCSVMapper';
+import moviesService from './services/moviesService';
 
-const movies = await mapCSVToObject(CSVReaderAsync, '/data/movies.csv');
-const actors = await mapCSVToObject(CSVReaderAsync, '/data/actors.csv');
-const roles = await mapCSVToObject(CSVReaderAsync, '/data/roles.csv');
 function App() {
-  const [count, setCount] = useState(0)
-  console.log(movies);
-  console.log(roles);
-  console.log(actors);
-
+  const [count, setCount] = useState(0);
+  moviesService.getAll();
 
   return (
     <>
