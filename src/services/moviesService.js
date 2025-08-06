@@ -5,14 +5,14 @@ import { CSVReaderAsync } from "../utils/CSVParser";
 export default {
     async getAll() {
         const movies = await mapCSVToObject(CSVReaderAsync, MOVIES_FILE_PATH);
-        return [...movies];
+        return [...movies]; //returns new reference to avoid mutation
     },
 
     async getById(movieId) { //returns new reference of the object we are looking for or 'No movie found with this id'
         const movie = (await this.getAll()).find(m => m.ID = movieId);
 
         if (movie) {
-            return {...movie};
+            return {...movie}; //returns new reference to avoid mutations
         } else {
             console.log('No movie found with this id');
             return 'No movie found with this id';
