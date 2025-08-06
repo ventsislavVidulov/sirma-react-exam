@@ -6,11 +6,13 @@ export const mapCSVToObject = async (CSVReaderAsyncFn, path) => {
         const titlesArray = resArray[0].split(','); //takes the titles from the first row of resArray
         for (let i = 1; i < resArray.length; i++) { //itterates trough all the CSV rows exept for the title
             const currentObject = {}; 
-            const currentValues = resArray[i].split(','); 
-            for (let j = 0; j < titlesArray.length; j++) { //itterates trough all the object properties
-                currentObject[titlesArray[j]] = currentValues[j]; 
+            if (resArray[i]) { //checking for empty rows
+                const currentValues = resArray[i].split(','); 
+                for (let j = 0; j < titlesArray.length; j++) { //itterates trough all the object properties
+                    currentObject[titlesArray[j]] = currentValues[j]; 
+                }
+                resultArray.push(currentObject);
             }
-            resultArray.push(currentObject);
         }
         return resultArray;
     } catch (error) {
