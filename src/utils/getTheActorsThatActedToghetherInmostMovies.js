@@ -33,8 +33,8 @@ export const getTheActorsThatActedToghetherInMostMovies = async () => {
         }
     });
     actorPairs.sort((a, b) => b.commonMoviesCount - a.commonMoviesCount); //sort the actor pairs common movies count in descending order
-    const topActorsPairMoviesCount = actorPairs[0].commonMoviesCount; 
+    const topActorsPairMoviesCount = Number(actorPairs[0].commonMoviesCount); 
     const topActorPairs = []; //returning array of top actors pairs if they are more than one
-    actorPairs.forEach(ap => ap.count === topActorsPairMoviesCount ? topActorPairs.push(ap) : null)
+    actorPairs.forEach(ap => ap.commonMoviesCount === topActorsPairMoviesCount ? topActorPairs.push(ap) : null);
     return topActorPairs;
 };
