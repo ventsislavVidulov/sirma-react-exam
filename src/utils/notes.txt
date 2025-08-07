@@ -1,0 +1,2 @@
+1. Mahe getTheActors.. pure function
+? 2. Make getTheActors returns array of actors ids instead of string of ids
