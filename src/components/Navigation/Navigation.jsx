@@ -3,14 +3,11 @@ import { Link } from "react-router";
 
 const Navigation = () => {
   return (
-    <>
-      <h1>Navigation</h1>
       <nav>
-        <Link to={"/"}>Home</Link>
-        <Link to={"/movies"}>Movies</Link>
-          <Link to={"/actors"}>Actors</Link>
+          <Link className={styles.link} to={"/"}>Home</Link>
+          <Link className={styles.link} to={"/movies"}>Movies</Link>
+          <Link className={styles.link} to={"/actors"}>Actors</Link>
       </nav>
-    </>
   )
 };
 

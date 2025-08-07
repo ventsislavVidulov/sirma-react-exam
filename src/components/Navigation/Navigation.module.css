@@ -1,0 +1,26 @@
+.link {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
+    url("/public/reel-frame.svg");
+    background-size: cover;
+    background-position: center;
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    height: 5.9rem;
+    width: 8rem;
+    transition: 0.5s;
+    margin:0 0.2rem;
+    font-size: 1.8rem;
+}
+
+.link:hover {
+    transform: scale(1.1);
+}
+nav {
+    display: flex;
+    margin: 1rem;
+}
