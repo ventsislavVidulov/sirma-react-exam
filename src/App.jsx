@@ -8,7 +8,7 @@ import actorsService from './services/actorsService';
 import { getTheActorsThatActedToghetherInMostMovies } from './utils/getTheActorsThatActedToghetherInmostMovies';
 import { Navigation } from "./components"
 import { Route, Routes } from 'react-router';
-import { Home } from './pages';
+import { Home, Movies } from './pages';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -28,6 +28,7 @@ function App() {
       <Navigation></Navigation>
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/movies' element={<Movies/>}/>
       </Routes>
     </>
   )
