@@ -1,7 +1,10 @@
 import { ACTORS_FILE_PATH } from "../constants";
 import { mapCSVToObject } from "../utils/objectCSVMapper";
 import { CSVReaderAsync } from "../utils/CSVParser";
-import { getTheActorsThatActedToghetherInMostMovies } from "../utils/getTheActorsThatActedToghetherInmostMovies";
+import { getTheActorsThatActedToghetherInMostMoviesUtil } from "../utils/getTheActorsThatActedToghetherInmostMoviesUtil";
+import { getMoviesByActorUtil } from "../utils/getMoviesByActorUtil";
+import rolesService from "./rolesService";
+import moviesService from "./moviesService";
 
 let actors = [];
 
@@ -31,9 +34,12 @@ const getById = async (actorId) => { //returns new reference of the object we ar
     }
 };
 
-const getTopActors = async (actors, roles, movies) => {
+const getTopActors = async () => {
     try {
-        const topActors = getTheActorsThatActedToghetherInMostMovies(actors, roles, movies);
+        const actors = await getAll();
+        const roles = await rolesService.getAll();
+        const movies = await moviesService.getAll();
+        const topActors = getTheActorsThatActedToghetherInMostMoviesUtil(movies, roles, actors);
         return topActors;
     } catch (error) {
         console.error(error.message)
@@ -41,8 +47,15 @@ const getTopActors = async (actors, roles, movies) => {
     }
 };
 
+const getMoviesByActor = async (actorId) => {
+    const movies = await moviesService.getAll();
+    const roles = await rolesService.getAll();
+    return getMoviesByActorUtil(movies, roles, actorId);
+};
+
 export default {
     getAll,
     getById,
-    getTopActors
+    getTopActors,
+    getMoviesByActor
 };
