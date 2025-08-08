@@ -1,11 +1,12 @@
+import { Link } from "react-router-dom";
 import styles from "./ActorCard.module.css"
 
-const ActorCard = ({ actorName }) => {
+const ActorCard = ({ actorName, actorId }) => {
     return (
-        <div className={styles.container}>
+        <Link to={`/actors/${actorId}`} className={styles.container}>
             <h1>{actorName}</h1>
-            <img src="/culture-cinema-icon.svg" alt="Image of the actor" />
-        </div>
+            <img src="/culture-cinema-icon.svg" alt="Image of the actor" className={styles.image}/>
+        </Link>
     )
 };
 

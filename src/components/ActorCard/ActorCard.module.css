@@ -4,8 +4,22 @@
     border: 2px solid black;
     border-radius: 1.5rem;
     transition: 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: black;
 }
 
-/* .container:hover {
-    border: 5px solid black
-} */
+.container:hover {
+transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.image {
+    width: 80%;
+    height: 20rem;
+    border-radius: 1.5rem 1.5rem ;
+    border: 2px solid black;
+    padding: 1rem;
+}
