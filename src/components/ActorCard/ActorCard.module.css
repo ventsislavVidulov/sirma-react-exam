@@ -13,14 +13,29 @@
 }
 
 .container:hover {
-transform: scale(1.05);
+    transform: scale(1.05);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .image {
     width: 80%;
     height: 20rem;
-    border-radius: 1.5rem 1.5rem ;
+    border-radius: 1.5rem 1.5rem;
     border: 2px solid black;
     padding: 1rem;
 }
+
+/* @media screen and (max-width: 768px) {
+    .container {
+        width: 7rem;
+        height: 10.5rem;
+        height: auto;
+        margin: 1rem 0;
+    }
+
+    .image {
+        width: 70%;
+        height: 6rem;
+        padding: 1rem;
+    }
+} */
