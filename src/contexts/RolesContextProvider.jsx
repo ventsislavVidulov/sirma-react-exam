@@ -16,7 +16,7 @@ const RolesContextProvider = ({ children }) => {
             try {
                 await simulatedDelay(DELAY_IN_MILISECONDS); //custom delay simulation for loading ui testing
                 setRoles(await rolesService.getAll());
-                // throw new Error('Test error from rolesContextProvider');
+                // throw new Error('Test error from RolesContextProvider');
             } catch (error) {
                 setError(error.message);
                 console.error(error.message);
