@@ -15,6 +15,7 @@ const ActorsContextProvider = ({ children }) => {
             try {
                 await simulatedDelay(DELAY_IN_MILISECONDS); //custom delay simulation for loading ui testing
                 setActors(await actorsService.getAll());
+                // throw new Error('Test error from ActorsContextProvider');
             } catch (error) {
                 setError(error.message);
                 console.error(error.message);
