@@ -1,11 +1,4 @@
-import actorsService from "../services/actorsService";
-import rolesService from "../services/rolesService";
-import moviesService from "../services/moviesService";
-
-export const getTheActorsThatActedToghetherInMostMovies = async () => {
-    const roles = await rolesService.getAll();
-    const actors = await actorsService.getAll();
-    const movies = await moviesService.getAll();
+export const getTheActorsThatActedToghetherInMostMovies = (movies, roles) => {
     roles.forEach(r => { //add property actors: string[] with the ids of the actors played in that movie
         const curnetMovie = movies.find(m => m.ID === r.MovieID);
         curnetMovie.hasOwnProperty('actors') ? curnetMovie.actors.push(r.ActorID) : curnetMovie.actors = [r.ActorID];
@@ -36,6 +29,6 @@ export const getTheActorsThatActedToghetherInMostMovies = async () => {
     const topActorsPairMoviesCount = Number(actorPairs[0].commonMoviesCount);
     const topActorPairs = []; //returning array of top actors pairs if they are more than one
     actorPairs.forEach(ap => ap.commonMoviesCount === topActorsPairMoviesCount ? topActorPairs.push(ap) : null);
-    
+
     return topActorPairs;
 };
