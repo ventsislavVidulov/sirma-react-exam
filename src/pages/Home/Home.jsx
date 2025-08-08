@@ -7,7 +7,7 @@ import { useData } from "../../contexts/DataContextProvider";
 
 const Home = () => {
     const [topActors, setTopActors] = useState([]);
-    const { loading, error, getActorById, getTopActors } = useData();
+    const { loading, error, getTopActors } = useData();
 
     useEffect(() => {
         if (!loading && !error) {
@@ -30,11 +30,11 @@ const Home = () => {
                 error ?
                     <h1>{actorsContext.error}</h1> :
                     topActors.map(ta =>
-                        (< div className={styles.container} key={`${ta.pairIds[0]}${ta.pairIds[1]}}`}>
-                            <ActorCard actorName={ta.pairNames[0]} />
-                            <ActorCard actorName={ta.pairNames[1]} />
-                        </div >)
-                        )
+                    (< div className={styles.container} key={`${ta.pairIds[0]}${ta.pairIds[1]}}`}>
+                        <ActorCard actorName={ta.pairNames[0]} actorId={ta.pairIds[0]} />
+                        <ActorCard actorName={ta.pairNames[1]} actorId={ta.pairIds[1]} />
+                    </div >)
+                    )
             }
         </>
     )
