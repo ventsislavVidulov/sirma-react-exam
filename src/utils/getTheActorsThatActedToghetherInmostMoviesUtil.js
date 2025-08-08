@@ -1,4 +1,4 @@
-export const getTheActorsThatActedToghetherInMostMovies = (movies, roles, actors) => {
+export const getTheActorsThatActedToghetherInMostMoviesUtil = (movies, roles, actors) => {
     roles.forEach(r => { //add property actors: string[] with the ids of the actors played in that movie
         const curnetMovie = movies.find(m => m.ID === r.MovieID);
         curnetMovie.hasOwnProperty('actors') ? curnetMovie.actors.push(r.ActorID) : curnetMovie.actors = [r.ActorID];
