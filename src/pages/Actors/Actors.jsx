@@ -17,7 +17,7 @@ const Actors = () => {
     };
     fetchActors();
   }, [actorsContext.loading, actorsContext.error])
-  
+
   return (
     <>
       <h1>Actors</h1>
@@ -25,11 +25,7 @@ const Actors = () => {
         ? <h1>Loading...</h1>
         : <div className={styles.container}>
           {actors.map(a => (
-            <ActorCard key={Math.random()} actorName={a.FullName} actorId={a.ID}>
-              <div>{a.ID}</div>
-              <div>{a.FullName}</div>
-              <div>{a.BirthDate}</div>
-            </ActorCard>
+            <ActorCard key={Number(a.ID)} actorName={a.FullName} actorId={a.ID} />
           ))}
         </div>
       }
