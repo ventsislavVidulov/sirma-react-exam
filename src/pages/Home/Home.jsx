@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 
 import styles from "./Home.module.css";
 import { ActorCard } from "../../components";
-import { useData } from "../../contexts/DataContextProvider";
+import { useActors} from "../../contexts/ActorContextProvider";
 
 const Home = () => {
     const [topActors, setTopActors] = useState([]);
-    const { loading, error, getTopActors } = useData();
+    const { loading, error, getTopActors } = useActors();
 
     useEffect(() => {
         if (!loading && !error) {

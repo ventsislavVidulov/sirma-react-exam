@@ -4,14 +4,17 @@ import { BrowserRouter } from 'react-router-dom';
 
 import './index.css';
 import App from './App.jsx';
-import { DataContextProvider } from './contexts/DataContextProvider.jsx';
+import { ActorsContextProvider } from './contexts/ActorContextProvider.jsx';
+import { MoviesContextProvider } from './contexts/MoviesContextProvider.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <DataContextProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </DataContextProvider >
+    <MoviesContextProvider>
+      <ActorsContextProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ActorsContextProvider >
+    </MoviesContextProvider>
   </StrictMode>
 );

@@ -1,14 +1,14 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styles from "./ActorDetails.module.css";
-import { useData } from "../../contexts/DataContextProvider";
+import { useActors } from "../../contexts/ActorContextProvider";
 
 
 const ActorDetails = () => {
     const [actor, setActor] = useState({});
     const [movies, setMovies] = useState([])
     const { actorId } = useParams();
-    const { getActorById, error, getMoviesByActor } = useData();
+    const { getActorById, error, getMoviesByActor } = useActors();
 
     useEffect(() => {
         const fetchActor = async () => {
