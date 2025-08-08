@@ -3,39 +3,38 @@ import { useLocation } from "react-router-dom";
 
 import styles from "./Home.module.css";
 import { ActorCard } from "../../components";
-import { useActors } from "../../contexts/ActorsContextProvider";
+import { useData } from "../../contexts/DataContextProvider";
 
 const Home = () => {
-    const [topActorsIds, setTopActorsIds] = useState([]);
-    const [error, setError] = useState('');
-    const [actors, setActors] = useState([]);
-    const actorsContext = useActors();
-    const location = useLocation();
+    const [topActors, setTopActors] = useState([]);
+    const { loading, error, getActorById, getTopActors } = useData();
 
     useEffect(() => {
-        const fetchTopActors = async () => {
-            try {
-                const topActors = (await actorsContext.getTopActors()).map(ta => ta.pairIds);
-                setTopActorsIds(topActors);
-                setActors(await actorsContext.actors)
-            } catch (error) {
-                setError(error.message);
-            }
-        };
-        fetchTopActors();
-    }, [location.pathname]);
+        if (!loading && !error) {
+            const fetchTopActors = async () => {
+                try {
+                    setTopActors(await getTopActors());
+                } catch (err) {
+                    console.error(err.message);
+                }
+            };
+            fetchTopActors();
+        }
+    }, [loading, error, getTopActors]);
 
     return (
         <>
             <h1>Home</h1>
-            {actorsContext.loading ?
-                    <h1>Loading</h1> :
-                    actorsContext.error || error ?
-                        <h1>{actorsContext.error}</h1> :
-                        <div className={styles.container}>
-                            <ActorCard actorName={topActorsIds[0]?.[0]} />
-                            <ActorCard actorName={topActorsIds[0]?.[1]} />
-                        </div>
+            {loading ?
+                <h1>Loading</h1> :
+                error ?
+                    <h1>{actorsContext.error}</h1> :
+                    topActors.map(ta =>
+                        (< div className={styles.container} key={`${ta.pairIds[0]}${ta.pairIds[1]}}`}>
+                            <ActorCard actorName={ta.pairNames[0]} />
+                            <ActorCard actorName={ta.pairNames[1]} />
+                        </div >)
+                        )
             }
         </>
     )
