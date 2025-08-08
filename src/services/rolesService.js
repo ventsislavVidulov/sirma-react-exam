@@ -6,11 +6,13 @@ let roles = [];
 
 export default {
     async getAll() {
-        try {
-            roles = await mapCSVToObject(CSVReaderAsync, ROLES_FILE_PATH);
-        } catch (error) {
-            console.error(error.message);
-            throw new Error(error.message);
+        if (roles.length === 0) {
+            try {
+                roles = await mapCSVToObject(CSVReaderAsync, ROLES_FILE_PATH);
+            } catch (error) {
+                console.error(error.message);
+                throw new Error(error.message);
+            }
         }
         return [...roles]; //returns new reference to avoid mutation
     },
