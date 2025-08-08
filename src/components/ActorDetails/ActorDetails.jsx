@@ -20,9 +20,7 @@ const ActorDetails = () => {
             }
         }
         fetchActor();
-    }, [actorId])
-
-    console.log(movies);
+    }, [actorId]);
 
     return (
         <>
@@ -31,7 +29,7 @@ const ActorDetails = () => {
             {
                 movies.map(m => {
                     return (
-                        <div key={m.movieId}>
+                        <div className={styles.container} key={m.movieId}>
                             <div>{m.movieTitle}</div>
                             <div>{m.role}</div>
                         </div>
