@@ -43,14 +43,17 @@ const DataContextProvider = ({ children }) => {
 
     useEffect(() => {
         if (!error && !loading) {
-            console.log('Actors context loaded');
+            console.log('Data context loaded');
         }
     }, [actors, roles, movies, error, loading]);
 
     const getTopActors = async () => {
-
-        return actorsService.getTopActors(movies, roles, actors);
+        return await actorsService.getTopActors();
     };
+
+    const getMoviesByActor = async (actorId) => {
+        return await actorsService.getMoviesByActor(actorId);
+    }
 
     const contextObject = {
         actors,
@@ -59,6 +62,8 @@ const DataContextProvider = ({ children }) => {
         error,
         loading,
         getActorById: actorsService.getById,
+        getMovieById: moviesService.getById,
+        getMoviesByActor,
         getTopActors
     };
 
@@ -71,9 +76,7 @@ const DataContextProvider = ({ children }) => {
 
 export const useData = () => {
     const context = useContext(DataContext);
-    if (context === undefined) {
-        throw new Error('useActors must be used within an ActorsContextProvider');
-    }
+
     return context;
 };
 
