@@ -31,7 +31,7 @@ const ActorDetails = () => {
             {
                 movies.map(m => {
                     return (
-                        <div key={m.movieTitle}>
+                        <div key={m.movieId}>
                             <div>{m.movieTitle}</div>
                             <div>{m.role}</div>
                         </div>
