@@ -39,7 +39,7 @@ const ActorsContextProvider = ({ children }) => {
         loading,
         getActorById: actorsService.getById,
         getTopActors: actorsService.getTopActors,
-        getMoviesByActor: async (actorId) => await actorsService.getMoviesByActor(actorId)
+        getMoviesByActor: actorsService.getMoviesByActor
     };
 
     return (
