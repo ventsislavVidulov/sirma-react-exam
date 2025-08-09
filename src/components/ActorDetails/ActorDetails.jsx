@@ -1,42 +1,52 @@
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+
 import styles from "./ActorDetails.module.css";
 import { useActors } from "../../contexts/ActorContextProvider";
 
-
 const ActorDetails = () => {
     const [actor, setActor] = useState({});
-    const [movies, setMovies] = useState([])
+    const [movies, setMovies] = useState([]);
+    const [error, setError] = useState('');
     const { actorId } = useParams();
-    const { getActorById, error, getMoviesByActor } = useActors();
+    const actorsContext = useActors();
 
     useEffect(() => {
         const fetchActor = async () => {
             try {
-                setActor(await getActorById(actorId));
-                setMovies(await getMoviesByActor(actorId));
+                if (actorsContext.error) {
+                    throw new Error(actorsContext.error.message);
+                }
+                setActor(await actorsContext.getActorById(actorId));
+                setMovies(await actorsContext.getMoviesByActor(actorId));
             } catch (err) {
-                console.log(err);
+                setError(err.message);
             }
         }
         fetchActor();
-    }, [actorId]);
+    }, []);
 
     return (
-        <>
-            {error ? <h1>{error.message}</ h1 >
-                : <h1>{actor.FullName}</h1>}
-            {
-                movies.map(m => {
-                    return (
-                        <div className={styles.container} key={m.movieId}>
-                            <div>{m.movieTitle}</div>
-                            <div>{m.role}</div>
-                        </div>
-                    )
-                })
+        <div className={styles.container}>
+            {error
+                ? <h1 className={styles.error}>{error}</h1>
+                : <>
+                    <div className={styles.actorInfo}>
+                        <h1>{actor.FullName}</h1>
+                        <div>Actor birth date: {new Date(actor.BirthDate).toDateString()}</div>
+                    </div>
+                </>
             }
-        </>
+            <div className={styles.moviesList}>
+                {movies.map(m => (
+                    <Link to={`/movies/${m.movieId}`} className={styles.movieCard} key={m.movieId}>
+                        <div className={styles.movieTitle}>{m.movieTitle}</div>
+                        <div className={styles.role}>Role: {m.role}</div>
+                    </Link>
+                ))}
+            </div>
+        </div>
     )
 };
+
 export default ActorDetails;
