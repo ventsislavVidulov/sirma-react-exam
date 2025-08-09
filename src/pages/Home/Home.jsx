@@ -25,7 +25,7 @@ const Home = () => {
         <>
             <h1>Home</h1>
             {loading ?
-                <h1>Loading</h1> :
+                <h1>Loading...</h1> :
                 error ?
                     <h1>{actorsContext.error}</h1> :
                     topActors.map(ta =>
