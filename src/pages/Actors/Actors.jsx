@@ -23,6 +23,8 @@ const Actors = () => {
       <h1>Actors</h1>
       {actorsContext.loading
         ? <h1>Loading...</h1>
+        : actorsContext.error ? 
+        <h1>{actorsContext.error}</h1>
         : <div className={styles.container}>
           {actors.map(a => (
             <ActorCard key={Number(a.ID)} actorName={a.FullName} actorId={a.ID} />
