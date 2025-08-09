@@ -24,6 +24,7 @@ const getById = async (actorId) => { //returns new reference of the object we ar
     try {
         const actor = (await getAll()).find(a => a.ID == actorId);
         if (actor) {
+            // throw new Error('Test error'); //simulating an error for testing purposes
             return { ...actor }; //returns new reference to avoid mutations
         } else {
             throw new Error('No actor found with this id')
