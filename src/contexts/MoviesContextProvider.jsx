@@ -37,7 +37,8 @@ const MoviesContextProvider = ({ children }) => {
         movies,
         error,
         loading,
-        getMoviesById: moviesService.getById,
+        getMovieById: moviesService.getById,
+        getActorsByMovie: moviesService.getActorsByMovie
     };
 
     return (

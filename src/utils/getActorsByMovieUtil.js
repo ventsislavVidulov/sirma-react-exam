@@ -1,0 +1,18 @@
+// ID,FullName,BirthDate
+// ID,ActorID,MovieID,RoleName
+
+export const getActorsByMovieUtil = (actors, roles, movieId) => {
+    console.log(movieId)
+    
+    const actorsByMovie = [];
+    roles.forEach(r => {
+        if (r.MovieID == movieId) {
+            const actorName = actors.find(a => a.ID == r.ActorID).FullName;
+            if (actorName) {
+                actorsByMovie.push({ actorName, role: r.RoleName == 'null' ? 'Unnamed' : r.RoleName, actorId: r.ActorID });
+            }
+        }
+    });
+    
+    return actorsByMovie;
+}
