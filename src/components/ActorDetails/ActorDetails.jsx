@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import styles from "./ActorDetails.module.css";
-import { useActors } from "../../contexts/ActorContextProvider";
+import { useActors } from "../../contexts/ActorsContextProvider";
 
 const ActorDetails = () => {
     const [actor, setActor] = useState({});

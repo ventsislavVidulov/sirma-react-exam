@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import styles from "./Home.module.css";
 import { ActorCard } from "../../components";
-import { useActors} from "../../contexts/ActorContextProvider";
+import { useActors} from "../../contexts/ActorsContextProvider";
 
 const Home = () => {
     const [topActors, setTopActors] = useState([]);

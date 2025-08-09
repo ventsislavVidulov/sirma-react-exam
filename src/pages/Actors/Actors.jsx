@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./Actors.module.css";
-import { useActors } from "../../contexts/ActorContextProvider";
+import { useActors } from "../../contexts/ActorsContextProvider";
 import { ActorCard } from "../../components";
 
 const Actors = () => {
