@@ -26,7 +26,7 @@ const Movies = () => {
         : moviesContext.error
           ? <h1>{moviesContext.error}</h1>
           : <div className={styles.container}>
-            {movies.map(m => <MovieCard movieId={m.ID} movieName={m.Title} />)}
+            {movies.map(m => <MovieCard movieId={m.ID} movieName={m.Title} key={m.ID}/>)}
           </div>
       }
     </>
