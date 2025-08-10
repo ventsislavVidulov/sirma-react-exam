@@ -15,8 +15,8 @@ nav {
   justify-content: center;
   height: 5.9rem;
   min-width: 8rem;
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), 
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
     url("/public/reel-frame.svg");
   background-size: cover;
   background-position: center;
@@ -61,10 +61,10 @@ nav {
   outline-offset: 2px;
 }
 
-.link.active {
+.linkActive {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)),
+    linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
     url("/public/reel-frame.svg");
-  transform: translateY(-2px);
+  /* transform: translateY(-5px); */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
