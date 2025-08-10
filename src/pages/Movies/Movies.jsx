@@ -24,7 +24,7 @@ const Movies = () => {
       {moviesContext.loading
         ? <h1>Loading...</h1>
         : moviesContext.error
-          ? <h1>{moviesContext.error}</h1>
+          ? <h1 className={styles.error}>{moviesContext.error}</h1>
           : <div className={styles.container}>
             {movies.map(m => <MovieCard movieId={m.ID} movieName={m.Title} key={m.ID}/>)}
           </div>

@@ -17,3 +17,10 @@
         padding: 0 3rem;
     }
 }
+
+.error {
+  color: #dc3545;
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.5rem;
+}

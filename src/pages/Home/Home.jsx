@@ -22,12 +22,12 @@ const Home = () => {
     }, [loading, error, getTopActors]);
 
     return (
-        <>
+        <section className={styles.page}>
             <h1>Home</h1>
             {loading ?
                 <h1>Loading...</h1> :
                 error ?
-                    <h1>{actorsContext.error}</h1> :
+                    <h1 className={styles.error}>{actorsContext.error}</h1> :
                     topActors.map(ta =>
                     (< div className={styles.container} key={`${ta.pairIds[0]}${ta.pairIds[1]}}`}>
                         <ActorCard actorName={ta.pairNames[0]} actorId={ta.pairIds[0]} />
@@ -35,7 +35,7 @@ const Home = () => {
                     </div >)
                     )
             }
-        </>
+        </section>
     )
 };
 
