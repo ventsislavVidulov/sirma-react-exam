@@ -19,7 +19,7 @@ const Movies = () => {
   }, [moviesContext.loading, moviesContext.error]);
 
   return (
-    <>
+    <section className={styles.page}>
       <h1>Movies</h1>
       {moviesContext.loading
         ? <h1>Loading...</h1>
@@ -29,7 +29,7 @@ const Movies = () => {
             {movies.map(m => <MovieCard movieId={m.ID} movieName={m.Title} key={m.ID}/>)}
           </div>
       }
-    </>
+    </section>
   )
 };
 

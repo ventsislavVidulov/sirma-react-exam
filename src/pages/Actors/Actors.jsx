@@ -19,7 +19,7 @@ const Actors = () => {
   }, [actorsContext.loading, actorsContext.error])
 
   return (
-    <>
+    <section className={styles.page}>
       <h1>Actors</h1>
       {actorsContext.loading
         ? <h1>Loading...</h1>
@@ -31,7 +31,7 @@ const Actors = () => {
           ))}
         </div>
       }
-    </>
+    </section>
   )
 };
 
