@@ -2,8 +2,6 @@
 // ID,ActorID,MovieID,RoleName
 
 export const getActorsByMovieUtil = (actors, roles, movieId) => {
-    console.log(movieId)
-    
     const actorsByMovie = [];
     roles.forEach(r => {
         if (r.MovieID == movieId) {

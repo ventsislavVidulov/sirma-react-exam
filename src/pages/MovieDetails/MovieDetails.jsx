@@ -26,8 +26,6 @@ const MovieDetails = () => {
         fetchActor();
     }, []);
 
-    console.log(actors);
-
     return (
         <div className={styles.container}>
             {error
