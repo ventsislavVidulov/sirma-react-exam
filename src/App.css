@@ -1,8 +1,10 @@
 :root {
   --light-blue: #e6f2ff;
+  --light-gray : #f8f9fa;
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.2);
   --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.45);
+
 }
 
 a {
