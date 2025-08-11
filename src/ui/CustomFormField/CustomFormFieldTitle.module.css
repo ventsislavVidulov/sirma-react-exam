@@ -1,0 +1,98 @@
+.form {
+    font-size: 1.6rem;
+    position: relative;
+    width: 50%;
+    /* height: 3rem; */
+    background-color: transparent;
+    display: grid;
+    place-items: center;
+    transition: all 160ms ease-in;
+    border-radius: 0.4rem;
+    /* margin: 3rem 0; */
+    font-weight: 700;
+}
+
+.formInput {
+    font-size: 1.6rem;
+    position: absolute;
+    /* left: -10px; */
+    text-indent: 5px;
+    padding: 0.5rem ;
+    width: 100%;
+    border-radius: 0.4rem;
+    background-color: transparent;
+    color: #000000;
+    outline: none;
+    border-radius: 0.4rem;
+    border: 2px solid rgb(110, 110, 110);
+    font-weight: 700;
+
+}
+
+.formInput:hover {
+    /* border-color: var(--light-blue); */
+    border: 2px solid black;
+}
+
+.formInput:focus {
+    border-color: var(--light-blue);
+    border: 2px solid black;
+
+}
+
+.formLabel {
+    position: absolute;
+    /* top: 1rem; */
+    left: 0rem;
+    /* transform: translateY(-50%); */
+    color: #000000;
+    pointer-events: none;
+    transition: all 160ms ease-in;
+    cursor: text;
+    transition: top 0.2s ease-in,
+        left 0.2s ease-in,
+        font-size 0.2s ease-in;
+    /* padding: 0rem 0.4rem; */
+    background-color: transparent;
+    font-size: 1.8rem;
+}
+
+.formInput:focus~.formLabel,
+.formInput:not(:placeholder-shown)~.formLabel {
+    font-size: 1rem;
+    top: -0.5rem;
+    left: 1rem;
+    color: black;
+    background-color: var(--light-gray)
+}
+
+@media (max-width: 768px) {
+    .form {
+        font-size: 1.6rem;
+        width: 80%;
+    }
+
+    .formLabel {
+        font-size: 1.5em;
+    }
+
+    .formInput:focus~.formLabel,
+    .formInput:not(:placeholder-shown)~.formLabel {
+        font-size: 0.8rem;
+        top: -0.8rem;
+        left: 1rem;
+        color: black;
+        background-color: var(--light-gray)
+    }
+}
+
+@media (max-width: 480px) {
+    .form {
+        font-size: 1.6rem;
+        width: 80%;
+    }
+
+    .formLabel {
+        font-size: 1.4rem;
+    }
+}
