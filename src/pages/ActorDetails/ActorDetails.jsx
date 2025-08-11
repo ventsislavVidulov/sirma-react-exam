@@ -35,7 +35,8 @@ const ActorDetails = () => {
                 : 
                     <DetailsHeader details={{
                         title: actor.FullName,
-                        info: `Actor birth date: ${new Date(actor.BirthDate).toDateString()}`
+                        info: `Actor birth date: ${new Date(actor.BirthDate).toDateString()}`,
+                        actorId: actor.ID
                     }}></DetailsHeader>
             }
             <div className={styles.moviesList}>

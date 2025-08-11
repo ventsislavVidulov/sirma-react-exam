@@ -49,14 +49,38 @@ const getTopActors = async () => {
 };
 
 const getMoviesByActor = async (actorId) => {
-    const movies = await moviesService.getAll();
-    const roles = await rolesService.getAll();
-    return getMoviesByActorUtil(movies, roles, actorId);
+    try {
+        const movies = await moviesService.getAll();
+        const roles = await rolesService.getAll();
+        return getMoviesByActorUtil(movies, roles, actorId);
+    } catch (error) {
+        console.error(error.message);
+        throw new Error(error.message);
+    }
 };
+
+const updateActor = async (actorId, updatedActor) => {
+    try {
+        const actorsList = await getAll();
+        console.log(actorId, updatedActor);
+        
+        const actorIndex = actorsList.findIndex(a => a.ID == actorId);
+        if (actorIndex === -1) {
+            throw new Error('No actor found with this id');
+        }
+        actorsList[actorIndex] = { ...actorsList[actorIndex], ...updatedActor };
+        actors = actorsList; // update the cached actors list
+        return { ...actorsList[actorIndex] }; // return the updated actor
+    } catch (error) {
+        console.error(error.message);
+        throw new Error(error.message);
+    }
+}
 
 export default {
     getAll,
     getById,
     getTopActors,
-    getMoviesByActor
+    getMoviesByActor,
+    updateActor,
 };

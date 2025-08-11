@@ -39,7 +39,8 @@ const ActorsContextProvider = ({ children }) => {
         loading,
         getActorById: actorsService.getById,
         getTopActors: actorsService.getTopActors,
-        getMoviesByActor: actorsService.getMoviesByActor
+        getMoviesByActor: actorsService.getMoviesByActor,
+        updateActor: actorsService.updateActor,
     };
 
     return (
