@@ -12,14 +12,6 @@ const DetailsHeader = ({ details }) => {
     const actorsContext = useActors();
 
     useEffect(() => {
-        const fetchUpdate = async () => {
-            try {
-                await actorsContext.updateActor(details.actorId, { FullName: title, BirthDate: details.info });
-            } catch (error) {
-                console.error(error.message)
-            }
-        };
-        fetchUpdate();
     }, [editing, title]);
 
     const saveHandler = async () => {
@@ -27,6 +19,7 @@ const DetailsHeader = ({ details }) => {
             if (editing) {
                 try {
                     setTitle(tempTitle);
+                    await actorsContext.updateActor(details.actorId, { FullName: title, BirthDate: details.info });
                 } catch (error) {
                     console.error(error.message)
                 }
