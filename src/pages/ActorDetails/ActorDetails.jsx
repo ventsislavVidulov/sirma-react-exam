@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router-dom";
 
 import styles from "./ActorDetails.module.css";
 import { useActors } from "../../contexts/ActorsContextProvider";
+import { CustomButton, FaGear } from "../../ui";
+import { DetailsHeader } from "../../components";
 
 const ActorDetails = () => {
     const [actor, setActor] = useState({});
@@ -30,12 +32,11 @@ const ActorDetails = () => {
         <div className={styles.container}>
             {error
                 ? <h1 className={styles.error}>{error}</h1>
-                : <>
-                    <div className={styles.actorInfo}>
-                        <h1>{actor.FullName}</h1>
-                        <div>Actor birth date: {new Date(actor.BirthDate).toDateString()}</div>
-                    </div>
-                </>
+                : 
+                    <DetailsHeader details={{
+                        title: actor.FullName,
+                        info: `Actor birth date: ${new Date(actor.BirthDate).toDateString()}`
+                    }}></DetailsHeader>
             }
             <div className={styles.moviesList}>
                 {movies.map(m => (

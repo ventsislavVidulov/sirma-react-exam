@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import styles from "./MovieDetails.module.css";
 import { useMovies } from "../../contexts/MoviesContextProvider";
+import styles from "./MovieDetails.module.css";
+import { DetailsHeader } from "../../components";
 
 const MovieDetails = () => {
     const [movie, setMovie] = useState({});
@@ -30,12 +31,10 @@ const MovieDetails = () => {
         <div className={styles.container}>
             {error
                 ? <h1 className={styles.error}>{error}</h1>
-                : <>
-                    <div className={styles.movieInfo}>
-                        <h1>{movie.Title}</h1>
-                        <div>Movie release date: {new Date(movie.ReleaseDate).toDateString()}</div>
-                    </div>
-                </>
+                :   <DetailsHeader details={{
+                        title: movie.Title,
+                        info: `Movie release date: ${new Date(movie.ReleaseDate).toDateString()}`
+                    }}></DetailsHeader>
             }
             <div className={styles.actorsList}>
                 {actors.map(a => (
