@@ -5,13 +5,18 @@ import styles from "./ActorDetails.module.css";
 import { useActors } from "../../contexts/ActorsContextProvider";
 import { CustomButton, FaGear } from "../../ui";
 import { DetailsHeader } from "../../components";
+import { useGetActor } from "../../queries/actorsQuery/useGetActor";
+import { useUpdateActor } from "../../queries/actorsQuery/useUpdateActor";
 
 const ActorDetails = () => {
     const [actor, setActor] = useState({});
     const [movies, setMovies] = useState([]);
-    const [error, setError] = useState('');
+    // const [error, setError] = useState('');
     const { actorId } = useParams();
     const actorsContext = useActors();
+
+    const getActorQuery = useGetActor(actorId);
+
 
     useEffect(() => {
         const fetchActor = async () => {
@@ -30,12 +35,13 @@ const ActorDetails = () => {
 
     return (
         <div className={styles.container}>
-            {error
-                ? <h1 className={styles.error}>{error}</h1>
-                : 
-                    <DetailsHeader details={{
-                        title: actor.FullName,
-                        info: `Actor birth date: ${new Date(actor.BirthDate).toDateString()}`,
+            {getActorQuery.isError
+                ? <h1 className={styles.error}>{getActorQuery.error}</h1>
+                : getActorQuery.isFetching
+                    ? <h1>Loading...</h1>
+                    : <DetailsHeader details={{
+                        title: getActorQuery.data.FullName,
+                        info: `Actor birth date: ${new Date(getActorQuery.data.BirthDate).toDateString()}`,
                         actorId: actor.ID
                     }}></DetailsHeader>
             }

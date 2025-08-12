@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 
+import { useUpdateActor } from "../../queries/actorsQuery/useUpdateActor";
 import { CustomButton, CustomFormFieldTitle, FaSave, FaGear } from "../../ui";
-import { useActors } from "../../contexts/ActorsContextProvider";
 
 import styles from "./DetailsHeader.module.css";
 
 const DetailsHeader = ({ details }) => {
-
     const [editing, setEditing] = useState(false);
     const [title, setTitle] = useState(details.title);
     const [tempTitle, setTempTitle] = useState('');
-    const actorsContext = useActors();
+    const updateActorQuery = useUpdateActor(details.actorId);
 
     useEffect(() => {
         if (editing) {
@@ -24,7 +23,7 @@ const DetailsHeader = ({ details }) => {
                 if (editing) {
                     try {
                         setTitle(tempTitle);
-                        await actorsContext.updateActor(details.actorId, { FullName: tempTitle, BirthDate: details.info });
+                        updateActorQuery.mutate({ FullName: tempTitle, BirthDate: details.info });
                     } catch (error) {
                         console.error(error.message);
                     }
