@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-;
+
+import { useUpdateMovie } from "../../queries/moviesQuery/useUpdateMovie";
 import { CustomButton, CustomFormFieldTitle, FaSave, FaGear, FaDelete } from "../../ui";
 
 import styles from "./MoviesDetailsHeader.module.css";
@@ -18,18 +19,15 @@ const MovieDetailsHeader = ({ details }) => {
 
     const saveHandler = () => {
         if (tempTitle.trim() || title) {
-            const fetchUpdate = async () => {
-                if (editing) {
-                    try {
-                        setTitle(tempTitle);
-                        updateMovieQuery.mutate({ Title: tempTitle, ReleaseDate: details.info });
-                    } catch (error) {
-                        console.error(error.message);
-                    }
+            if (editing) {
+                try {
+                    setTitle(tempTitle);
+                    updateMovieQuery.mutate({ Title: tempTitle, ReleaseDate: details.info });
+                } catch (error) {
+                    console.error(error.message);
                 }
-                setEditing(!editing);
-            };
-            fetchUpdate();
+            }
+            setEditing(!editing);
         }
     };
 
@@ -45,14 +43,14 @@ const MovieDetailsHeader = ({ details }) => {
                     {editing
                         ? <>
                             <CustomFormFieldTitle label={title || details.title} fieldChangeHandler={fieldChangeHandler}></CustomFormFieldTitle>
-                           <div className={styles.buttonsContainer}>
-                            <CustomButton>
-                                <FaDelete/>
-                            </CustomButton>
-                            <CustomButton handleClickFunction={saveHandler}>
-                                <FaSave />
-                            </CustomButton>
-                           </div>
+                            <div className={styles.buttonsContainer}>
+                                <CustomButton>
+                                    <FaDelete />
+                                </CustomButton>
+                                <CustomButton handleClickFunction={saveHandler}>
+                                    <FaSave />
+                                </CustomButton>
+                            </div>
                         </>
                         : <>
                             <h1>{title || details.title}</h1>

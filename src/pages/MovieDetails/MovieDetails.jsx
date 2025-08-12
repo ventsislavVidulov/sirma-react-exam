@@ -33,7 +33,8 @@ const MovieDetails = () => {
                 ? <h1 className={styles.error}>{error}</h1>
                 :   <MovieDetailsHeader details={{
                         title: movie.Title,
-                        info: `Movie release date: ${new Date(movie.ReleaseDate).toDateString()}`
+                        info: `Movie release date: ${new Date(movie.ReleaseDate).toDateString()}`,
+                        movieId: movie.ID
                     }}></MovieDetailsHeader>
             }
             <div className={styles.actorsList}>
