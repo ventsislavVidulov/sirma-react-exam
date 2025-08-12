@@ -6,6 +6,5 @@ export const useGetMoviesByActor = (actorId) => {
     return useQuery({
         queryKey: actorQueryKeys.moviesPlayed(actorId),
         queryFn: () => actorsService.getMoviesByActor(actorId),
-        enabled: !!actorId,
     });
 };
