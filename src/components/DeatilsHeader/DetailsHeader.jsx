@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useUpdateActor } from "../../queries/actorsQuery/useUpdateActor";
-import { CustomButton, CustomFormFieldTitle, FaSave, FaGear } from "../../ui";
+import { CustomButton, CustomFormFieldTitle, FaSave, FaGear, FaDelete } from "../../ui";
 
 import styles from "./DetailsHeader.module.css";
 
@@ -46,9 +46,14 @@ const DetailsHeader = ({ details }) => {
                     {editing
                         ? <>
                             <CustomFormFieldTitle label={title || details.title} fieldChangeHandler={fieldChangeHandler}></CustomFormFieldTitle>
+                           <div className={styles.buttonsContainer}>
+                            <CustomButton>
+                                <FaDelete/>
+                            </CustomButton>
                             <CustomButton handleClickFunction={saveHandler}>
                                 <FaSave />
                             </CustomButton>
+                           </div>
                         </>
                         : <>
                             <h1>{title || details.title}</h1>
