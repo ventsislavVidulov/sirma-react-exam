@@ -1,6 +1,6 @@
 const FaDelete = () => {
     return (
-        <i class="fa fa-trash" aria-hidden="true"></i>
+        <i className="fa fa-trash" aria-hidden="true"></i>
     )
 };
 
