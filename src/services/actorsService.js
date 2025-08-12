@@ -1,7 +1,7 @@
 import { ACTORS_FILE_PATH } from "../constants";
 import { mapCSVToObject } from "../utils/objectCSVMapper";
 import { CSVReaderAsync } from "../utils/CSVParser";
-import { getTheActorsThatActedToghetherInMostMoviesUtil } from "../utils/getTheActorsThatActedToghetherInmostMoviesUtil";
+import { getTopActorsUtil } from "../utils/getTopActorsUtil";
 import { getMoviesByActorUtil } from "../utils/getMoviesByActorUtil";
 import rolesService from "./rolesService";
 import moviesService from "./moviesService";
@@ -40,7 +40,7 @@ const getTopActors = async () => {
         const actors = await getAll();
         const roles = await rolesService.getAll();
         const movies = await moviesService.getAll();
-        const topActors = getTheActorsThatActedToghetherInMostMoviesUtil(movies, roles, actors);
+        const topActors = getTopActorsUtil(movies, roles, actors);
         return topActors;
     } catch (error) {
         console.error(error.message)
