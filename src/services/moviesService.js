@@ -41,8 +41,10 @@ const getById = async (movieId) => { //returns new reference of the object we ar
 const getActorsByMovie = async (movieId) => {
     try {
         await simulatedDelay(DELAY_IN_MILISECONDS);
-        const actors = await actorsService.getAll();
-        const roles = await rolesService.getAll();
+        const [actors, roles] = await Promise.all([
+            await actorsService.getAll(),
+            await rolesService.getAll(),
+        ])
         return getActorsByMovieUtil(actors, roles, movieId);
     } catch (error) {
         console.error(error.message);
