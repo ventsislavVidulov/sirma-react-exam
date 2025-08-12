@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import { useGetMovies } from "../../queries/moviesQuery/useGetMovies";
 import styles from "./Movies.module.css";
 import { MovieCard } from "../../components";
-import { useMovies } from "../../contexts/MoviesContextProvider";
 
 const Movies = () => {
   const { isError, error, isFetching: loading, data: movies } = useGetMovies();
