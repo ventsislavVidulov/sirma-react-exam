@@ -50,8 +50,26 @@ const getActorsByMovie = async (movieId) => {
     }
 };
 
+const updateMovie = async (movieId, movieData) => {
+    console.log(movieId, movieData);
+    
+    try {
+        await simulatedDelay(DELAY_IN_MILISECONDS);
+        const movieIndex = movies.findIndex(m => m.ID == movieId);
+        if (movieIndex === -1) {
+            throw new Error("No movie found with this id");
+        }
+        movies[movieIndex] = { ...movies[movieIndex], ...movieData };
+        return { ...movies[movieIndex] }; //returns new reference to avoid mutations
+    } catch (error) {
+        console.error(error.message);
+        throw new Error(error.message);
+    }
+};
+
 export default {
     getAll,
     getById,
-    getActorsByMovie
+    getActorsByMovie,
+    updateMovie
 };
