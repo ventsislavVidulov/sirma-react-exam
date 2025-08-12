@@ -51,8 +51,6 @@ const getActorsByMovie = async (movieId) => {
 };
 
 const updateMovie = async (movieId, movieData) => {
-    console.log(movieId, movieData);
-    
     try {
         await simulatedDelay(DELAY_IN_MILISECONDS);
         const movieIndex = movies.findIndex(m => m.ID == movieId);
