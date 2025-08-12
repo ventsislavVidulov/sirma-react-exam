@@ -1,15 +1,19 @@
 import { MOVIES_FILE_PATH } from "../constants";
 import { mapCSVToObject } from "../utils/objectCSVMapper";
 import { CSVReaderAsync } from "../utils/CSVParser";
-import{ getActorsByMovieUtil } from "../utils/getActorsByMovieUtil";
+import { getActorsByMovieUtil } from "../utils/getActorsByMovieUtil";
 import rolesService from "./rolesService";
 import actorsService from "./actorsService";
+import { simulatedDelay } from "../utils/simulatedDelay";
+import { DELAY_IN_MILISECONDS } from "../constants";
 
 let movies = [];
 
 const getAll = async () => {
     if (movies.length === 0) {
         try {
+            await simulatedDelay(DELAY_IN_MILISECONDS);
+            // throw new Error("Test error from moviesService"); //simulating an error for testing purposes
             movies = await mapCSVToObject(CSVReaderAsync, MOVIES_FILE_PATH);
         } catch (error) {
             console.error(error.messge);
@@ -21,8 +25,8 @@ const getAll = async () => {
 
 const getById = async (movieId) => { //returns new reference of the object we are looking for or 'No movie found with this id'
     try {
+        await simulatedDelay(DELAY_IN_MILISECONDS);
         const movie = (await getAll()).find(m => m.ID == movieId);
-
         if (movie) {
             return { ...movie }; //returns new reference to avoid mutations
         } else {
@@ -35,11 +39,17 @@ const getById = async (movieId) => { //returns new reference of the object we ar
 };
 
 const getActorsByMovie = async (movieId) => {
-    const roles = await rolesService.getAll();
-    const actors = await actorsService.getAll();    
-    return getActorsByMovieUtil( actors, roles, movieId);
+    try {
+        await simulatedDelay(DELAY_IN_MILISECONDS);
+        const actors = await actorsService.getAll();
+        const roles = await rolesService.getAll();
+        return getActorsByMovieUtil(actors, roles, movieId);
+    } catch (error) {
+        console.error(error.message);
+        throw new Error(error.message);
+    }
 };
-    
+
 export default {
     getAll,
     getById,
