@@ -1,2 +1,0 @@
-1. At first I used 3 separate contexts, but to get the top actors I must provide roles and movies to the actors context anyway, 
-so I united all the contexts in DataContext

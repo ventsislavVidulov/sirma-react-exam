@@ -57,7 +57,6 @@ const getTopActors = async () => {
 };
 
 const getMoviesByActor = async (actorId) => {
-    console.log('here');
     try {
         await simulatedDelay(DELAY_IN_MILISECONDS);
         const [movies, roles] = await Promise.all([
