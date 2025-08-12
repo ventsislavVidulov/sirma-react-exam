@@ -5,12 +5,16 @@ import { getTopActorsUtil } from "../utils/getTopActorsUtil";
 import { getMoviesByActorUtil } from "../utils/getMoviesByActorUtil";
 import rolesService from "./rolesService";
 import moviesService from "./moviesService";
+import { simulatedDelay } from "../utils/simulatedDelay";
+import { DELAY_IN_MILISECONDS } from "../constants";
 
 let actors = [];
 
 const getAll = async () => {
     if (actors.length === 0) {
         try {
+            // throw new Error("`Test error from actorsService`"); //simulating an error for testing purposes
+            await simulatedDelay(DELAY_IN_MILISECONDS);
             actors = await mapCSVToObject(CSVReaderAsync, ACTORS_FILE_PATH);
         } catch (error) {
             console.error(error.message);
@@ -22,6 +26,7 @@ const getAll = async () => {
 
 const getById = async (actorId) => { //returns new reference of the object we are looking for or 'No actor found with this id'
     try {
+        await simulatedDelay(DELAY_IN_MILISECONDS);
         const actor = (await getAll()).find(a => a.ID == actorId);
         if (actor) {
             // throw new Error('Test error'); //simulating an error for testing purposes
@@ -37,6 +42,7 @@ const getById = async (actorId) => { //returns new reference of the object we ar
 
 const getTopActors = async () => {
     try {
+        await simulatedDelay(DELAY_IN_MILISECONDS);
         const actors = await getAll();
         const roles = await rolesService.getAll();
         const movies = await moviesService.getAll();
@@ -50,6 +56,7 @@ const getTopActors = async () => {
 
 const getMoviesByActor = async (actorId) => {
     try {
+        await simulatedDelay(DELAY_IN_MILISECONDS);
         const movies = await moviesService.getAll();
         const roles = await rolesService.getAll();
         return getMoviesByActorUtil(movies, roles, actorId);
@@ -61,6 +68,7 @@ const getMoviesByActor = async (actorId) => {
 
 const updateActor = async (actorId, updatedActor) => {
     try {
+        // await simulatedDelay(DELAY_IN_MILISECONDS);
         const actorsList = await getAll();
         const actorIndex = actorsList.findIndex(a => a.ID == actorId);
         if (actorIndex === -1) {
