@@ -6,27 +6,35 @@ import { useActors } from "../../contexts/ActorsContextProvider";
 import styles from "./DetailsHeader.module.css";
 
 const DetailsHeader = ({ details }) => {
+
     const [editing, setEditing] = useState(false);
-    const [title, setTitle] = useState('');
+    const [title, setTitle] = useState(details.title);
     const [tempTitle, setTempTitle] = useState('');
     const actorsContext = useActors();
 
     useEffect(() => {
-    }, [editing, title]);
+        if (editing) {
+            setTempTitle(title || details.title);
+        }
+    }, [editing, title, details.title]);
 
-    const saveHandler = async () => {
-        const fetchUpdate = async () => {
-            if (editing) {
-                try {
-                    setTitle(tempTitle);
-                    await actorsContext.updateActor(details.actorId, { FullName: title, BirthDate: details.info });
-                } catch (error) {
-                    console.error(error.message)
+    console.log(editing, title, tempTitle, details);
+
+    const saveHandler = () => {
+        if (tempTitle.trim() || title) {
+            const fetchUpdate = async () => {
+                if (editing) {
+                    try {
+                        setTitle(tempTitle);
+                        await actorsContext.updateActor(details.actorId, { FullName: tempTitle, BirthDate: details.info });
+                    } catch (error) {
+                        console.error(error.message);
+                    }
                 }
-            }
-            setEditing(!editing);
-        };
-        fetchUpdate();
+                setEditing(!editing);
+            };
+            fetchUpdate();
+        }
     };
 
     const fieldChangeHandler = (e) => {
