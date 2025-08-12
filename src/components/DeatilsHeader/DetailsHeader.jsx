@@ -18,8 +18,6 @@ const DetailsHeader = ({ details }) => {
         }
     }, [editing, title, details.title]);
 
-    console.log(editing, title, tempTitle, details);
-
     const saveHandler = () => {
         if (tempTitle.trim() || title) {
             const fetchUpdate = async () => {
