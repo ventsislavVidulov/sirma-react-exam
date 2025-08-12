@@ -1,8 +1,5 @@
-import { useEffect, useState } from "react";
-
 import styles from "./Home.module.css";
 import { ActorCard } from "../../components";
-import { useActors } from "../../contexts/ActorsContextProvider";
 import { useGetTopActors } from "../../queries/actorsQuery/useGetTopActors";
 
 const Home = () => {
