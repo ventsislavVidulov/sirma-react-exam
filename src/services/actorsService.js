@@ -43,9 +43,11 @@ const getById = async (actorId) => { //returns new reference of the object we ar
 const getTopActors = async () => {
     try {
         await simulatedDelay(DELAY_IN_MILISECONDS);
-        const actors = await getAll();
-        const roles = await rolesService.getAll();
-        const movies = await moviesService.getAll();
+        const [actors, roles, movies] = await Promise.all([
+            getAll(),
+            rolesService.getAll(),
+            moviesService.getAll()
+        ]);
         const topActors = getTopActorsUtil(movies, roles, actors);
         return topActors;
     } catch (error) {
@@ -55,10 +57,13 @@ const getTopActors = async () => {
 };
 
 const getMoviesByActor = async (actorId) => {
+    console.log('here');
     try {
         await simulatedDelay(DELAY_IN_MILISECONDS);
-        const movies = await moviesService.getAll();
-        const roles = await rolesService.getAll();
+        const [movies, roles] = await Promise.all([
+            moviesService.getAll(), 
+            rolesService.getAll()
+        ]);
         return getMoviesByActorUtil(movies, roles, actorId);
     } catch (error) {
         console.error(error.message);
