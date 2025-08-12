@@ -4,7 +4,7 @@ import actorsService from "../../services/actorsService";
 
 export const useGetTopActors = () => {
     return useQuery({
-        queryKey: actorQueryKeys.details(actorId),
-        queryFn: () => actorsService.getById(actorId),
+        queryKey: actorQueryKeys.topActors(),
+        queryFn: () => actorsService.getTopActors(),
     });
 };
