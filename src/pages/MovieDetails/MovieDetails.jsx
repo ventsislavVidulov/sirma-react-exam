@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 
 import { useMovies } from "../../contexts/MoviesContextProvider";
 import styles from "./MovieDetails.module.css";
-import { DetailsHeader } from "../../components";
+import { MovieDetailsHeader } from "../../components";
 
 const MovieDetails = () => {
     const [movie, setMovie] = useState({});
@@ -31,10 +31,10 @@ const MovieDetails = () => {
         <div className={styles.container}>
             {error
                 ? <h1 className={styles.error}>{error}</h1>
-                :   <DetailsHeader details={{
+                :   <MovieDetailsHeader details={{
                         title: movie.Title,
                         info: `Movie release date: ${new Date(movie.ReleaseDate).toDateString()}`
-                    }}></DetailsHeader>
+                    }}></MovieDetailsHeader>
             }
             <div className={styles.actorsList}>
                 {actors.map(a => (
