@@ -7,8 +7,7 @@ export const useGetActors = () => {
         queryKey: actorQueryKeys.all,
         queryFn: actorsService.getAll,
         staleTime: 1000 * 60 * 5, //time the data is considered fresh
-        cacheTime: 1000 * 60 * 10, //time the data is kept in cache after it becomes stal
-        refetchOnWindowFocus: false,
+        cacheTime: 1000 * 60 * 10, //time the data is kept in cache after it becomes stale
     });
 };
 
