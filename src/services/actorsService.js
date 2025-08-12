@@ -62,8 +62,6 @@ const getMoviesByActor = async (actorId) => {
 const updateActor = async (actorId, updatedActor) => {
     try {
         const actorsList = await getAll();
-        console.log(actorId, updatedActor);
-        
         const actorIndex = actorsList.findIndex(a => a.ID == actorId);
         if (actorIndex === -1) {
             throw new Error('No actor found with this id');
