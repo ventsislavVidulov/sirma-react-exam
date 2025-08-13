@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { useGetMovie } from "./../../queries/moviesQuery/useGetMovie";
 import { useGetActorsByMovie } from "./../../queries/moviesQuery/useGetActorsByMovie";
 import styles from "./MovieDetails.module.css";
-import { MovieDetailsHeader } from "../../components";
+import { DetailsCard, MovieDetailsHeader } from "../../components";
 
 const MovieDetails = () => {
     const { movieId } = useParams();
@@ -28,10 +28,7 @@ const MovieDetails = () => {
                     : areActorsFetching
                         ? <h1>Loading...</h1>
                         : actors?.map(a => (
-                            <Link to={`/actors/${a.actorId}`} className={styles.actorCard} key={a.actorId}>
-                                <div className={styles.actorTitle}>{a.actorName}</div>
-                                <div className={styles.role}>Role: {a.role}</div>
-                            </Link>
+                            <DetailsCard details={a} key={a.actorId} />
                         ))}
             </div>
         </div>

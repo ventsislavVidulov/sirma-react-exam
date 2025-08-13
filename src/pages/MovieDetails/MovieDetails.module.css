@@ -11,25 +11,6 @@
   margin-top: 2rem;
 }
 
-.actorCard {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: var(--shadow-md);
-  padding: 1.5rem;
-  transition: transform 0.2s;
-}
-
-.actorCard:hover {
-  transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-}
-
-.actorTitle {
-  font-size: 1.3rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: #333;
-}
 
 .role {
   font-size: 1rem;
@@ -45,7 +26,7 @@
 }
 
 @media (max-width: 768px) {
-.actorsList {
+  .actorsList {
     grid-template-columns: 1fr;
   }
 }
@@ -53,8 +34,5 @@
 @media (max-width: 480px) {
   .container {
     padding: 10px;
-  }
-  .actorCard {
-    padding: 1rem;
   }
 }

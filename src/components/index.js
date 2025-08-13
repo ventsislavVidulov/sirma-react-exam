@@ -6,5 +6,16 @@ import MovieDetailsHeader from "./MovieDetailsHeader/MovieDetailsHeader";
 import AddMovieHeader from "./AddMovieHeader/AddMovieHeader";
 import AddActorHeader from "./AddActorHeader/AddActorHeader";
 import AddCard from "./AddCart/AddCard";
+import DetailsCard from "./DetailsCard/DetailsCard";
 
-export { Navigation, ActorCard, MovieCard, ActorDetailsHeader, MovieDetailsHeader, AddMovieHeader, AddActorHeader, AddCard };
+export {
+    Navigation,
+    ActorCard,
+    MovieCard,
+    DetailsCard, 
+    ActorDetailsHeader,
+    MovieDetailsHeader,
+    AddMovieHeader,
+    AddActorHeader,
+    AddCard
+};
