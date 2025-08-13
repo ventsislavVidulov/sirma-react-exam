@@ -1,21 +1,82 @@
-# Sirma Academy exam - Movie database
+# 🎬 Sirma Academy Exam – Movie Database
 
-## UX structure
+A movie database web application built as part of the **Sirma Academy** exam.  
+It features movies, actors, and detailed views with editing capabilities.
 
-1. Navigation bar - provides links to **Home**, **Movies** list and **Actors** list pages
-2. **Home** page - shwos the top actors pairs (those who acted toghether in most movies)
-    - *Actors cards* are clickable and lead to coresponding **Actor details**
-3. **Movies** page - list of *Add movie* card and all *Movie cards*
-   - *Add movie* card leads to **Add movie** page where the user can add new movie
-   - each *Movie card* leads to its coresponding **Movie details** page
-4. **Actors** page - same functionality as **Movies* page
-5. **Movie details** page displays movie title, release date and all actors played in that movie
-   - clicking on *Gear* icon alows user to edit movie tittle and release date
-   - clicking on *Save* icon that replaces *Gear* icon saves the new values for title and release date
-   - *Delete* icon functionality is not implemented
-   - clicking on any of the *Actor card* leads to its coresponding details page
-6. **Actors details** page - same as **Movie details++
-7. **Add movie** - page looking like **Movie details** edit mode
-   - clicking on *Save* icon saves the newly created movie and redirects to its coresponding **Movie details** page
-   - clicking on *Delete* icon redirects back to **Movies page**
+---
+
+## 📚 Libraries Used
+- **React + Vite**
+- **React Router DOM**
+- **React Query**
+
+---
+
+## 🖥 UX Structure
+
+### 1. Navigation Bar
+Provides links to:
+- **Home**
+- **Movies** list
+- **Actors** list
+
+### 2. Home Page
+- Displays the **top actor pairs** (actors who acted together in the most movies).
+- **Actor cards** are clickable and lead to the corresponding **Actor Details** page.
+
+### 3. Movies Page
+- Shows an **Add Movie** card and all **Movie cards**.
+- **Add Movie** card → leads to the **Add Movie** page.
+- Each **Movie card** → leads to its corresponding **Movie Details** page.
+
+### 4. Actors Page
+- Same functionality as the **Movies** page.
+
+### 5. Movie Details Page
+- Displays:
+  - Movie title
+  - Release date
+  - List of all actors in the movie
+- Actions:
+  - **Gear icon** → edit movie title and release date
+  - **Save icon** → saves new values (replaces the Gear icon when editing)
+  - **Delete icon** → *not implemented*
+  - Clicking on an **Actor card** → leads to the corresponding **Actor Details** page
+
+### 6. Actor Details Page
+- Same functionality as the **Movie Details** page.
+
+### 7. Add Movie Page
+- Layout similar to **Movie Details** in edit mode.
+- **Save icon** → saves the new movie and redirects to its **Movie Details** page.
+- **Delete icon** → redirects back to the **Movies** page.
+
+### 8. Add Actor Page
+- Same as the **Add Movie** page.
+
+### 9. Error & Loading States
+- Error and loading states are displayed where relevant.
+- Loading interval can be adjusted in constants.
+
+---
+
+## 📂 Folder Structure
+
+This project follows an **atomic-like design** pattern:
+
+| Folder       | Description |
+|--------------|-------------|
+| `components` | Components that hold state or are composed of smaller UI elements |
+| `constants`  | Application constants such as routes and simulated delay values |
+| `contexts`   | *(Deprecated)* |
+| `pages`      | Full-page views |
+| `queries`    | React Query hooks and configurations |
+| `services`   | Simulated server interaction logic |
+| `ui`         | Presentational ("dumb") components |
+| `utils`      | Pure functions for CSV parsing, mapping, calculating top actors, etc. |
+
+---
+
+## 🙏 Acknowledgments
+I want to thank the **Sirma Academy Team** for the knowledge acquired and the great time enjoyed during this learning experience.
 
