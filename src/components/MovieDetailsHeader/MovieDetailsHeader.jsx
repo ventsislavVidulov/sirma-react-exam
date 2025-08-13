@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useUpdateMovie } from "../../queries/moviesQuery/useUpdateMovie";
 import { CustomButton, CustomFormFieldTitle, FaSave, FaGear, FaDelete } from "../../ui";
 
-import styles from "./MoviesDetailsHeader.module.css";
+import styles from "./MovieDetailsHeader.module.css";
 
 const MovieDetailsHeader = ({ details }) => {
     const [editing, setEditing] = useState(false);
