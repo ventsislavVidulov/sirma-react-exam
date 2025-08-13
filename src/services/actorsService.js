@@ -60,7 +60,7 @@ const getMoviesByActor = async (actorId) => {
     try {
         await simulatedDelay(DELAY_IN_MILISECONDS);
         const [movies, roles] = await Promise.all([
-            moviesService.getAll(), 
+            moviesService.getAll(),
             rolesService.getAll()
         ]);
         return getMoviesByActorUtil(movies, roles, actorId);
@@ -93,12 +93,13 @@ const addActor = async (actorData) => {
         await getAll(); //ensure actors are loaded before adding a new one
         const actorsLength = actors.length;
 
-        const lastId = actorsLength > 0 ? Number(actors[actorsLength- 1].ID) : 0;
-        if (!actorData.Name || !actorData.Birthdate) {
-            throw new Error(actorData.Birthdate ? "Invalid actor data" : "Enter birthdate");
+        const lastId = actorsLength > 0 ? Number(actors[actorsLength - 1].ID) : 0;
+        if (!actorData.FullName || !actorData.BirthDate) {
+            throw new Error(actorData.BirthDate ? "Invalid actor data" : "Enter birthdate");
         }
         const newActor = { ...actorData, ID: lastId + 1 };
         actors.push(newActor);
+
         return { ...newActor }; //returns new reference to avoid mutations
     } catch (error) {
         console.error(error.message);

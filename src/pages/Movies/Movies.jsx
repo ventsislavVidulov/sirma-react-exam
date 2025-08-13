@@ -13,7 +13,7 @@ const Movies = () => {
         : loading
           ? <h1>Loading...</h1>
           : <div className={styles.container}>
-            <AddCard link={'/add-movie'} />
+            <AddCard link={'/add-movie'} header={"Add movie"} imgSrc={"/add-symbol.svg"} imgAlt={"Add movie plus symbol"} />
             {movies?.map(m => <MovieCard movieId={m.ID} movieName={m.Title} key={m.ID} />)}
           </div>
       }

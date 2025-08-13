@@ -4,5 +4,6 @@ import Actors from "./Actors/Actors";
 import MovieDetails from "./MovieDetails/MovieDetails";
 import ActorDetails from "./ActorDetails/ActorDetails";
 import AddMovie from "./AddMovie/AddMovie";
+import AddActor from "./AddActor/AddActor";
 
-export {Home, Movies, Actors, MovieDetails, ActorDetails, AddMovie};
+export {Home, Movies, Actors, MovieDetails, ActorDetails, AddMovie, AddActor};

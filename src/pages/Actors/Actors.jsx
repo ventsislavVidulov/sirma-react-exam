@@ -1,5 +1,5 @@
 import styles from "./Actors.module.css";
-import { ActorCard } from "../../components";
+import { ActorCard, AddCard } from "../../components";
 import { useGetActors } from "../../queries/actorsQuery/useGetActors";
 
 const Actors = () => {
@@ -13,6 +13,7 @@ const Actors = () => {
         : isError ?
           <h1 className={styles.error}>{error.message}</h1>
           : <div className={styles.container}>
+            <AddCard link={'/add-actor'}  header={"Add actor"} imgSrc={"/add-symbol.svg"} imgAlt={"Add actor plus symbol"} />
             {actors?.map(a => (
               <ActorCard key={Number(a.ID)} actorName={a.FullName} actorId={a.ID} />
             ))}
