@@ -59,7 +59,7 @@ Provides links to:
 - Loading interval can be adjusted in constants.
 
 ### 10. Responsive layout
-- All pages have respovsive layaout
+- All pages have respovsive layout
 ---
 
 ## 📂 Folder Structure
