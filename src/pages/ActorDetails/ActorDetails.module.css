@@ -80,7 +80,7 @@
 @media (max-width: 768px) {
   .headerContainer h1 {
     font-size: 2rem;
-    padding-left: 0.3ren;
+    padding-left: 0.3rem;
   }
 
   .moviesList {

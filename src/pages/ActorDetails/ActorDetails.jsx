@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 
 import styles from "./ActorDetails.module.css";
-import { DetailsHeader } from "../../components";
+import { ActorDetailsHeader } from "../../components";
 import { useGetActor } from "../../queries/actorsQuery/useGetActor";
 import { useGetMoviesByActor } from "../../queries/actorsQuery/useGetMoviesByActor";
 
@@ -16,11 +16,11 @@ const ActorDetails = () => {
                 ? <h1 className={styles.error}>{actorError.message}</h1>
                 : isActorFetching
                     ? <h1>Loading...</h1>
-                    : <DetailsHeader details={{
+                    : <ActorDetailsHeader details={{
                         title: actor.FullName,
                         info: `Actor birth date: ${new Date(actor.BirthDate).toDateString()}`,
                         actorId: actor.ID
-                    }}></DetailsHeader>
+                    }}></ActorDetailsHeader>
             }
             <div className={styles.moviesList}>
                 {moviesError

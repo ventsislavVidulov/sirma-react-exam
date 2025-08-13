@@ -38,7 +38,7 @@ const MovieDetailsHeader = ({ details }) => {
 
     return (
         <>
-            <div className={styles.detailsInfo}>
+            <div className={styles.container}>
                 <div className={styles.headerContainer}>
                     {editing
                         ? <>
@@ -60,7 +60,7 @@ const MovieDetailsHeader = ({ details }) => {
                         </>
                     }
                 </div>
-                <div>{details.info}</div>
+                <div className={styles.detailsInfo}>{details.info}</div>
             </div>
         </>
     )
