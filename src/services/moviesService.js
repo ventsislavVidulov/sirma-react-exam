@@ -67,9 +67,29 @@ const updateMovie = async (movieId, movieData) => {
     }
 };
 
+const addMovie = async (movieData) => {
+    try {
+        await simulatedDelay(DELAY_IN_MILISECONDS);
+        await getAll(); //ensure movies are loaded before adding a new one
+        const moviesLength = movies.length;
+
+        const lastId = moviesLength > 0 ? Number(movies[moviesLength- 1].ID) : 0;
+        if (!movieData.Title || !movieData.ReleaseDate) {
+            throw new Error(movieData.ReleaseDate ? "Invalid movie data" : "Enter release date");
+        }
+        const newMovie = { ...movieData, ID: lastId + 1 };
+        movies.push(newMovie);
+        return { ...newMovie }; //returns new reference to avoid mutations
+    } catch (error) {
+        console.error(error.message);
+        throw new Error(error.message);
+    }
+};
+
 export default {
     getAll,
     getById,
     getActorsByMovie,
-    updateMovie
+    updateMovie, 
+    addMovie
 };
