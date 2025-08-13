@@ -58,6 +58,8 @@ Provides links to:
 - Error and loading states are displayed where relevant.
 - Loading interval can be adjusted in constants.
 
+### 10. Responsive layout
+- All pages have respovsive layaout
 ---
 
 ## 📂 Folder Structure
