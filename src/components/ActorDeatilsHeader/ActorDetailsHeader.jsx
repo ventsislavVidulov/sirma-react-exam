@@ -5,8 +5,7 @@ import { CustomButton, CustomFormFieldTitle, FaSave, FaGear, FaDelete, DateInput
 
 import styles from "./ActorDetailsHeader.module.css";
 
-const ActorDetailsHeader = ({ details: { title: actorNameProp, actorId: actorIdProp, info: actorBirthDateProp } }) => {
-    const [editing, setEditing] = useState(false);
+const ActorDetailsHeader = ({ details: { title: actorNameProp, actorId: actorIdProp, info: actorBirthDateProp }, editingHandler, editing  }) => {
     const [title, setTitle] = useState(actorNameProp);
     const tempTitle = useRef('');
     const [date, setDate] = useState(actorBirthDateProp);
@@ -33,7 +32,7 @@ const ActorDetailsHeader = ({ details: { title: actorNameProp, actorId: actorIdP
                         console.error(error.message);
                     }
                 }
-                setEditing(!editing);
+                editingHandler();
             };
             fetchUpdate();
         }
@@ -67,7 +66,7 @@ const ActorDetailsHeader = ({ details: { title: actorNameProp, actorId: actorIdP
                         </>
                         : <>
                             <h1>{title || actorNameProp}</h1>
-                            <CustomButton handleClickFunction={() => setEditing(!editing)}>
+                            <CustomButton handleClickFunction={editingHandler}>
                                 <FaGear />
                             </CustomButton>
                         </>

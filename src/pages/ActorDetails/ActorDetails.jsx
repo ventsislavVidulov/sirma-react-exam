@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router-dom";
+import { useState } from "react";
 
 import styles from "./ActorDetails.module.css";
 import { ActorDetailsHeader, DetailsCard, DetailsCardContainer } from "../../components";
@@ -8,8 +9,13 @@ import { useGetMoviesByActor } from "../../queries/actorsQuery/useGetMoviesByAct
 
 const ActorDetails = () => {
     const { actorId } = useParams();
+    const [ editing, setEditing] = useState(false);
     const { error: actorError, isFetching: isActorFetching, data: actor } = useGetActor(actorId);
     const { error: moviesError, isFetching: areMoviesFetching, data: movies } = useGetMoviesByActor(actorId);
+
+    const editingHandler = () => {
+        setEditing(!editing);
+    };
 
     return (
         <div className={styles.container}>
@@ -21,7 +27,10 @@ const ActorDetails = () => {
                         title: actor?.FullName,
                         info: actor?.BirthDate,
                         actorId: actor?.ID
-                    }}></ActorDetailsHeader>
+                    }}
+                        editingHandler={editingHandler}
+                        editing={editing}
+                    ></ActorDetailsHeader>
             }
             <DetailsCardContainer type={"movie"}>
                 {moviesError
