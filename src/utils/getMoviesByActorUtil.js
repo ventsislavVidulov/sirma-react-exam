@@ -4,7 +4,7 @@ export const getMoviesByActorUtil = (movies, roles, actorId) => {
         if (r.ActorID == actorId) {
             const movieTitle = movies.find(m => m.ID == r.MovieID).Title;
             if (movieTitle) {
-                moviesByActor.push({movieTitle: movieTitle, role: r.RoleName == 'null' ? 'Unnamed' : r.RoleName, movieId: r.MovieID});
+                moviesByActor.push({movieTitle: movieTitle, role: r.RoleName == 'NULL' ? 'Unnamed' : r.RoleName, movieId: r.MovieID});
             }
         }
     });

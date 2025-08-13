@@ -7,7 +7,7 @@ export const getActorsByMovieUtil = (actors, roles, movieId) => {
         if (r.MovieID == movieId) {
             const actorName = actors.find(a => a.ID == r.ActorID).FullName;
             if (actorName) {
-                actorsByMovie.push({ actorName, role: r.RoleName == 'null' ? 'Unnamed' : r.RoleName, actorId: r.ActorID });
+                actorsByMovie.push({ actorName, role: r.RoleName == 'NULL' ? 'Unnamed' : r.RoleName, actorId: r.ActorID });
             }
         }
     });
