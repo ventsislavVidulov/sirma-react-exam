@@ -87,10 +87,30 @@ const updateActor = async (actorId, updatedActor) => {
     }
 }
 
+const addActor = async (actorData) => {
+    try {
+        await simulatedDelay(DELAY_IN_MILISECONDS);
+        await getAll(); //ensure actors are loaded before adding a new one
+        const actorsLength = actors.length;
+
+        const lastId = actorsLength > 0 ? Number(actors[actorsLength- 1].ID) : 0;
+        if (!actorData.Name || !actorData.Birthdate) {
+            throw new Error(actorData.Birthdate ? "Invalid actor data" : "Enter birthdate");
+        }
+        const newActor = { ...actorData, ID: lastId + 1 };
+        actors.push(newActor);
+        return { ...newActor }; //returns new reference to avoid mutations
+    } catch (error) {
+        console.error(error.message);
+        throw new Error(error.message);
+    }
+};
+
 export default {
     getAll,
     getById,
     getTopActors,
     getMoviesByActor,
     updateActor,
+    addActor
 };
