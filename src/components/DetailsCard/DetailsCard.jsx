@@ -1,7 +1,7 @@
 import styles from "./DetailsCard.module.css";
 import { useNavigate } from "react-router-dom";
 
-const DetailsCard = ({ details }) => {
+const DetailsCard = ({ details, selectOptions, disabled, editing }) => {
     const navigate = useNavigate();
 
     const handleClick = (e) => {
@@ -13,12 +13,37 @@ const DetailsCard = ({ details }) => {
         }
     };
 
+    const selectedTitle = details.movieTitle || details.actorName;
+
     return (
-        <div className={styles.card} onClick={handleClick}>
-            <h2 className={styles.cardTitle}>{details.movieTitle ? details.movieTitle : details.actorName}</h2>
-            <p className={styles.role}>Role: {details.role}</p>
-        </div>
+        <>
+            {!editing ? (
+                <div className={styles.card} onClick={handleClick}>
+                    <div className={styles.cardTitle}>{selectedTitle}</div>
+                    <div className={styles.role}>Role: {details.role}</div>
+                </div>
+            ) : (
+                <div className={styles.card}>
+                    <select
+                        className={styles.cardTitle}
+                        disabled={disabled}
+                        value={selectedTitle}
+                        onChange={() => {}} 
+                    >
+                        {selectOptions?.map((option) => (
+                            <option key={option.ID} value={option.Title}>
+                                {option.Title}
+                            </option>
+                        ))}
+                    </select>
+                    <input
+                        className={styles.role}
+                        value={`Role: ${details.role}`}
+                    />
+                </div>
+            )}
+        </>
     );
-}
+};
 
 export default DetailsCard;

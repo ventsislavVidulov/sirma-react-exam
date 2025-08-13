@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState } from "react";
 
 import styles from "./ActorDetails.module.css";
@@ -6,12 +6,14 @@ import { ActorDetailsHeader, DetailsCard, DetailsCardContainer } from "../../com
 
 import { useGetActor } from "../../queries/actorsQuery/useGetActor";
 import { useGetMoviesByActor } from "../../queries/actorsQuery/useGetMoviesByActor";
+import { useGetMovies } from "../../queries/moviesQuery/useGetMovies";
 
 const ActorDetails = () => {
     const { actorId } = useParams();
-    const [ editing, setEditing] = useState(false);
+    const [editing, setEditing] = useState(false);
     const { error: actorError, isFetching: isActorFetching, data: actor } = useGetActor(actorId);
-    const { error: moviesError, isFetching: areMoviesFetching, data: movies } = useGetMoviesByActor(actorId);
+    const { error: moviesByActorError, isFetching: areMoviesByActorFetching, data: moviesByActor } = useGetMoviesByActor(actorId); //may be extracted by all movies query
+    const { error: allMoviesError, isFetching: areAllMoviesFetching, data: allMovies } = useGetMovies();
 
     const editingHandler = () => {
         setEditing(!editing);
@@ -33,12 +35,12 @@ const ActorDetails = () => {
                     ></ActorDetailsHeader>
             }
             <DetailsCardContainer type={"movie"}>
-                {moviesError
-                    ? <h1 className={styles.error}>{moviesError.message}</h1>
-                    : areMoviesFetching
-                        ? <h1>Loading...</h1>
-                        : movies?.map(m => (
-                            <DetailsCard details={m} key={m.movieId} />
+                {moviesByActorError || allMoviesError
+                    ? <h1 className={styles.error}>{moviesByActorError?.message || allMoviesError?.message}</h1>
+                    : areMoviesByActorFetching || areAllMoviesFetching
+                    ? <h1>Loading...</h1>
+                    : moviesByActor?.map(m => (
+                        <DetailsCard details={m} key={m.movieId} editing={editing} selectOptions={allMovies} />
                         ))
                 }
             </DetailsCardContainer>
