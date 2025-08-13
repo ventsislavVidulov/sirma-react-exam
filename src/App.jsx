@@ -1,7 +1,7 @@
 import './App.css';
 import { Navigation } from "./components";
-import { Route, Routes } from 'react-router';
-import { Actors, Home, Movies, ActorDetails, MovieDetails} from './pages';
+import { Navigate, Route, Routes } from 'react-router';
+import { Actors, Home, Movies, ActorDetails, MovieDetails } from './pages';
 
 function App() {
 
@@ -14,6 +14,7 @@ function App() {
         <Route path='/actors' element={<Actors />} />
         <Route path='/actors/:actorId' element={<ActorDetails />} />
         <Route path='/movies/:movieId' element={<MovieDetails />} />
+        <Route path='*' element={<Navigate to={'/'} replace />} />
       </Routes>
     </>
   )
