@@ -66,7 +66,7 @@ This project follows an **atomic-like design** pattern:
 
 | Folder       | Description |
 |--------------|-------------|
-| `public`     | Contains csv and image files
+| `public`     | Csv and image files
 | `components` | Components that hold state or are composed of smaller UI elements |
 | `constants`  | Application constants such as routes and simulated delay values |
 | `contexts`   | *(Deprecated)* |
