@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import { useUpdateActor } from "../../queries/actorsQuery/useUpdateActor";
 import { CustomButton, CustomFormFieldTitle, FaSave, FaGear, FaDelete, DateInput } from "../../ui";
@@ -8,28 +8,27 @@ import styles from "./ActorDetailsHeader.module.css";
 const ActorDetailsHeader = ({ details: { title: actorName, actorId, info: actorBirthDate } }) => {
     const [editing, setEditing] = useState(false);
     const [title, setTitle] = useState(actorName);
-    const [tempTitle, setTempTitle] = useState('');
+    const tempTitle = useRef('');
     const [date, setDate] = useState(actorBirthDate);
-    const [tempDate, setTempDate] = useState('');
+    const tempDate = useRef('');
     const updateActorQuery = useUpdateActor(actorId);
 
     useEffect(() => {
         if (editing) {
-            setTempTitle(title || actorName);
-            setTempDate(date || actorBirthDate);
+            tempTitle.current = (title || actorName);
+            tempDate.current = (date || actorBirthDate);
         }
     }, [editing, title, actorName, date, actorBirthDate]);
 
     const saveHandler = () => {
-        if (tempTitle.trim() || title) {
+        if (tempTitle.current.trim() || title) {
             const fetchUpdate = async () => {
                 if (editing) {
                     try {
-                        setTitle(tempTitle);
+                        setTitle(tempTitle.current);
                         setDate(tempDate);
-                        console.log(date);
 
-                        updateActorQuery.mutate({ FullName: tempTitle, BirthDate: tempDate });
+                        updateActorQuery.mutate({ FullName: tempTitle.current, BirthDate: tempDate.current });
                     } catch (error) {
                         console.error(error.message);
                     }
@@ -42,13 +41,12 @@ const ActorDetailsHeader = ({ details: { title: actorName, actorId, info: actorB
 
     const fieldChangeHandler = (e) => {
         e.preventDefault();
-        setTempTitle(e.target.value);
+        tempTitle.current = (e.target.value);
     };
 
     const dateChangeHandler = (e) => {
         e.preventDefault();
-        console.log(e.target.value);
-        setTempDate(e.target.value);
+        tempDate.current = (e.target.value);
     }
 
     return (
