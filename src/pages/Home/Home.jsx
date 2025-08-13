@@ -16,7 +16,7 @@ const Home = () => {
                         ? <h1>Our top actors are</h1>
                         : <h1>We have {topActors.length} top actor pairs</h1>
             }
-            {topActors.map(ta =>
+            {topActors?.map(ta =>
             (< div className={styles.container} key={`${ta.pairIds[0]}${ta.pairIds[1]}}`}>
                 <ActorCard actorName={ta.pairNames[0]} actorId={ta.pairIds[0]} />
                 <ActorCard actorName={ta.pairNames[1]} actorId={ta.pairIds[1]} />
