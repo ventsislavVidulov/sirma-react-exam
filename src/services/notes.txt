@@ -1,3 +1,0 @@
-1. The services are quite similar and could be merged into one. On the other hand, this might make their usage messy.
-2. All services return new references of the data, which is unnecessary at this point. However, if some kind of basic caching is implemented, 
-this could be a good design decision.
