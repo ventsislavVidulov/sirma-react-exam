@@ -1,28 +1,32 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import { useUpdateMovie } from "../../queries/moviesQuery/useUpdateMovie";
-import { CustomButton, CustomFormFieldTitle, FaSave, FaGear, FaDelete } from "../../ui";
+import { CustomButton, CustomFormFieldTitle, FaSave, FaGear, FaDelete, DateInput } from "../../ui";
 
 import styles from "./MovieDetailsHeader.module.css";
 
-const MovieDetailsHeader = ({ details }) => {
+const MovieDetailsHeader = ({ details: { title: movieTitleProp, movieId: movieIdProp, info: movieReleaseDateProp } }) => {
     const [editing, setEditing] = useState(false);
-    const [title, setTitle] = useState(details.title);
-    const [tempTitle, setTempTitle] = useState('');
-    const updateMovieQuery = useUpdateMovie(details.movieId);
+    const [title, setTitle] = useState(movieTitleProp);
+    const tempTitle = useRef('');
+    const [releaseDate, setReleaseDate] = useState(movieReleaseDateProp);
+    const tempReleaseDate = useRef('');
+    const updateMovieQuery = useUpdateMovie(movieIdProp);
 
     useEffect(() => {
         if (editing) {
-            setTempTitle(title || details.title);
+            tempTitle.current = (title || movieTitleProp);
+            tempReleaseDate.current = (releaseDate || movieReleaseDateProp)
         }
-    }, [editing, title, details.title]);
+    }, [editing, title, movieTitleProp, releaseDate, movieReleaseDateProp]);
 
     const saveHandler = () => {
-        if (tempTitle.trim() || title) {
+        if (tempTitle.current.trim() || title) {
             if (editing) {
                 try {
-                    setTitle(tempTitle);
-                    updateMovieQuery.mutate({ Title: tempTitle, ReleaseDate: details.info });
+                    setTitle(tempTitle.current);
+                    setReleaseDate(tempReleaseDate.current);
+                    updateMovieQuery.mutate({ Title: tempTitle.current, ReleaseDate: tempReleaseDate.current });
                 } catch (error) {
                     console.error(error.message);
                 }
@@ -33,7 +37,12 @@ const MovieDetailsHeader = ({ details }) => {
 
     const fieldChangeHandler = (e) => {
         e.preventDefault();
-        setTempTitle(e.target.value);
+        tempTitle.current = (e.target.value);
+    };
+
+    const dateChangeHandler = (e) => {
+        e.preventDefault();
+        tempReleaseDate.current = (e.target.value);
     };
 
     return (
@@ -42,7 +51,7 @@ const MovieDetailsHeader = ({ details }) => {
                 <div className={styles.headerContainer}>
                     {editing
                         ? <>
-                            <CustomFormFieldTitle label={title || details.title} fieldChangeHandler={fieldChangeHandler}></CustomFormFieldTitle>
+                            <CustomFormFieldTitle label={title || movieTitleProp} fieldChangeHandler={fieldChangeHandler}></CustomFormFieldTitle>
                             <div className={styles.buttonsContainer}>
                                 <CustomButton>
                                     <FaDelete />
@@ -53,14 +62,17 @@ const MovieDetailsHeader = ({ details }) => {
                             </div>
                         </>
                         : <>
-                            <h1>{title || details.title}</h1>
+                            <h1>{title || movieTitleProp}</h1>
                             <CustomButton handleClickFunction={() => setEditing(!editing)}>
                                 <FaGear />
                             </CustomButton>
                         </>
                     }
                 </div>
-                <div className={styles.detailsInfo}>{details.info}</div>
+                {editing
+                    ? <DateInput dateChangeHandler={dateChangeHandler} />
+                    : <div className={styles.detailsInfo}>{`Movie release date: ${new Date(movieReleaseDateProp).toDateString()}`}</div>
+                }
             </div>
         </>
     )

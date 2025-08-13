@@ -18,7 +18,7 @@ const MovieDetails = () => {
                     ? <h1>Loading...</h1>
                     : <MovieDetailsHeader details={{
                         title: movie?.Title,
-                        info: `Movie release date: ${new Date(movie?.ReleaseDate).toDateString()}`,
+                        info: movie?.ReleaseDate,
                         movieId: movie?.ID
                     }}></MovieDetailsHeader>
             }
