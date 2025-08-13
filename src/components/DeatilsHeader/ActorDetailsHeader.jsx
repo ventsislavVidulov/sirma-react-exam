@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { useUpdateActor } from "../../queries/actorsQuery/useUpdateActor";
 import { CustomButton, CustomFormFieldTitle, FaSave, FaGear, FaDelete } from "../../ui";
 
-import styles from "./DetailsHeader.module.css";
+import styles from "./ActorDetailsHeader.module.css";
 
-const DetailsHeader = ({ details }) => {
+const ActorDetailsHeader = ({ details }) => {
     const [editing, setEditing] = useState(false);
     const [title, setTitle] = useState(details.title);
     const [tempTitle, setTempTitle] = useState('');
@@ -41,7 +41,7 @@ const DetailsHeader = ({ details }) => {
 
     return (
         <>
-            <div className={styles.detailsInfo}>
+            <div className={styles.container}>
                 <div className={styles.headerContainer}>
                     {editing
                         ? <>
@@ -63,10 +63,10 @@ const DetailsHeader = ({ details }) => {
                         </>
                     }
                 </div>
-                <div>{details.info}</div>
+                <div className={styles.detailsInfo}>{details.info}</div>
             </div>
         </>
     )
 };
 
-export default DetailsHeader;
+export default ActorDetailsHeader;
