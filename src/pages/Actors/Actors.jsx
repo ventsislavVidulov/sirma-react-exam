@@ -13,7 +13,7 @@ const Actors = () => {
         : isError ?
           <h1 className={styles.error}>{error.message}</h1>
           : <div className={styles.container}>
-            {actors.map(a => (
+            {actors?.map(a => (
               <ActorCard key={Number(a.ID)} actorName={a.FullName} actorId={a.ID} />
             ))}
           </div>

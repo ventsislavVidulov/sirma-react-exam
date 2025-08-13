@@ -17,9 +17,9 @@ const ActorDetails = () => {
                 : isActorFetching
                     ? <h1>Loading...</h1>
                     : <ActorDetailsHeader details={{
-                        title: actor.FullName,
-                        info: `Actor birth date: ${new Date(actor.BirthDate).toDateString()}`,
-                        actorId: actor.ID
+                        title: actor?.FullName,
+                        info: `Actor birth date: ${new Date(actor?.BirthDate).toDateString()}`,
+                        actorId: actor?.ID
                     }}></ActorDetailsHeader>
             }
             <div className={styles.moviesList}>

@@ -13,7 +13,7 @@ const Movies = () => {
       : loading
       ? <h1>Loading...</h1>
       : <div className={styles.container}>
-        {movies.map(m => <MovieCard movieId={m.ID} movieName={m.Title} key={m.ID} />)}
+        {movies?.map(m => <MovieCard movieId={m.ID} movieName={m.Title} key={m.ID} />)}
       </div>
       }
     </section>
