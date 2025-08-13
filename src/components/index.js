@@ -7,15 +7,17 @@ import AddMovieHeader from "./AddMovieHeader/AddMovieHeader";
 import AddActorHeader from "./AddActorHeader/AddActorHeader";
 import AddCard from "./AddCart/AddCard";
 import DetailsCard from "./DetailsCard/DetailsCard";
+import DetailsCardContainer from "./DetaisCardContainer/DetailsCardContainer";
 
 export {
     Navigation,
     ActorCard,
     MovieCard,
     DetailsCard, 
+    DetailsCardContainer,
     ActorDetailsHeader,
     MovieDetailsHeader,
     AddMovieHeader,
     AddActorHeader,
-    AddCard
+    AddCard,
 };

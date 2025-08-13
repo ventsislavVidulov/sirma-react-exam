@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { useGetMovie } from "./../../queries/moviesQuery/useGetMovie";
 import { useGetActorsByMovie } from "./../../queries/moviesQuery/useGetActorsByMovie";
 import styles from "./MovieDetails.module.css";
-import { DetailsCard, MovieDetailsHeader } from "../../components";
+import { DetailsCard, DetailsCardContainer, MovieDetailsHeader } from "../../components";
 
 const MovieDetails = () => {
     const { movieId } = useParams();
@@ -22,7 +22,7 @@ const MovieDetails = () => {
                         movieId: movie?.ID
                     }}></MovieDetailsHeader>
             }
-            <div className={styles.actorsList}>
+            <DetailsCardContainer type="actor">
                 {actorsError
                     ? <h1 className={styles.error}>{actorsError.message}</h1>
                     : areActorsFetching
@@ -30,7 +30,7 @@ const MovieDetails = () => {
                         : actors?.map(a => (
                             <DetailsCard details={a} key={a.actorId} />
                         ))}
-            </div>
+            </DetailsCardContainer>
         </div>
     )
 };
