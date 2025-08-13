@@ -1,21 +1,24 @@
 import { useEffect, useState } from "react";
 
 import { useUpdateActor } from "../../queries/actorsQuery/useUpdateActor";
-import { CustomButton, CustomFormFieldTitle, FaSave, FaGear, FaDelete } from "../../ui";
+import { CustomButton, CustomFormFieldTitle, FaSave, FaGear, FaDelete, DateInput } from "../../ui";
 
 import styles from "./ActorDetailsHeader.module.css";
 
-const ActorDetailsHeader = ({ details }) => {
+const ActorDetailsHeader = ({ details: { title: actorName, actorId, info: actorBirthDate } }) => {
     const [editing, setEditing] = useState(false);
-    const [title, setTitle] = useState(details.title);
+    const [title, setTitle] = useState(actorName);
     const [tempTitle, setTempTitle] = useState('');
-    const updateActorQuery = useUpdateActor(details.actorId);
+    const [date, setDate] = useState(actorBirthDate);
+    const [tempDate, setTempDate] = useState('');
+    const updateActorQuery = useUpdateActor(actorId);
 
     useEffect(() => {
         if (editing) {
-            setTempTitle(title || details.title);
+            setTempTitle(title || actorName);
+            setTempDate(date || actorBirthDate);
         }
-    }, [editing, title, details.title]);
+    }, [editing, title, actorName, date, actorBirthDate]);
 
     const saveHandler = () => {
         if (tempTitle.trim() || title) {
@@ -23,7 +26,10 @@ const ActorDetailsHeader = ({ details }) => {
                 if (editing) {
                     try {
                         setTitle(tempTitle);
-                        updateActorQuery.mutate({ FullName: tempTitle, BirthDate: details.info });
+                        setDate(tempDate);
+                        console.log(date);
+
+                        updateActorQuery.mutate({ FullName: tempTitle, BirthDate: tempDate });
                     } catch (error) {
                         console.error(error.message);
                     }
@@ -39,31 +45,40 @@ const ActorDetailsHeader = ({ details }) => {
         setTempTitle(e.target.value);
     };
 
+    const dateChangeHandler = (e) => {
+        e.preventDefault();
+        console.log(e.target.value);
+        setTempDate(e.target.value);
+    }
+
     return (
         <>
             <div className={styles.container}>
                 <div className={styles.headerContainer}>
                     {editing
                         ? <>
-                            <CustomFormFieldTitle label={title || details.title} fieldChangeHandler={fieldChangeHandler}></CustomFormFieldTitle>
-                           <div className={styles.buttonsContainer}>
-                            <CustomButton>
-                                <FaDelete/>
-                            </CustomButton>
-                            <CustomButton handleClickFunction={saveHandler}>
-                                <FaSave />
-                            </CustomButton>
-                           </div>
+                            <CustomFormFieldTitle label={title || actorName} fieldChangeHandler={fieldChangeHandler}></CustomFormFieldTitle>
+                            <div className={styles.buttonsContainer}>
+                                <CustomButton>
+                                    <FaDelete />
+                                </CustomButton>
+                                <CustomButton handleClickFunction={saveHandler}>
+                                    <FaSave />
+                                </CustomButton>
+                            </div>
                         </>
                         : <>
-                            <h1>{title || details.title}</h1>
+                            <h1>{title || actorName}</h1>
                             <CustomButton handleClickFunction={() => setEditing(!editing)}>
                                 <FaGear />
                             </CustomButton>
                         </>
                     }
                 </div>
-                <div className={styles.detailsInfo}>{details.info}</div>
+                {editing
+                    ? <DateInput dateChangeHandler={dateChangeHandler}></DateInput>
+                    : <div className={styles.detailsInfo}>{`Actor birth date: ${new Date(date).toDateString()}`}</div>
+                }
             </div>
         </>
     )
