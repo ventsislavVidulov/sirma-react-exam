@@ -24,7 +24,7 @@ const MovieDetails = () => {
             }
             <div className={styles.actorsList}>
                 {actorsError
-                    ? <h1 className={styles.error}>{actorsErrorError.message}</h1>
+                    ? <h1 className={styles.error}>{actorsError.message}</h1>
                     : areActorsFetching
                         ? <h1>Loading...</h1>
                         : actors?.map(a => (
