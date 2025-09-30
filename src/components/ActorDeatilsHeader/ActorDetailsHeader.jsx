@@ -13,6 +13,8 @@ const ActorDetailsHeader = ({ details: { title: actorNameProp, actorId: actorIdP
     const updateActorQuery = useUpdateActor(actorIdProp);
 
     useEffect(() => {
+        console.log('use effect called');
+        
         if (editing) {
             tempTitle.current = (title || actorNameProp);
             tempDate.current = (date || actorBirthDateProp);

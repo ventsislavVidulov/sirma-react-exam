@@ -1,7 +1,7 @@
 import { ACTORS_FILE_PATH } from "../constants";
 import { mapCSVToObject } from "../utils/objectCSVMapper";
 import { CSVReaderAsync } from "../utils/CSVParser";
-import { getTopActorsUtil } from "../utils/getTopActorsUtil";
+import { getTopActorsUtil, getTopActorsOptimazedUtil } from "../utils/getTopActorsUtil";
 import { getMoviesByActorUtil } from "../utils/getMoviesByActorUtil";
 import rolesService from "./rolesService";
 import moviesService from "./moviesService";
@@ -43,13 +43,27 @@ const getById = async (actorId) => { //returns new reference of the object we ar
 const getTopActors = async () => {
     try {
         await simulatedDelay(DELAY_IN_MILISECONDS);
-        const [actors, roles, movies] = await Promise.all([
-            getAll(),
-            rolesService.getAll(),
-            moviesService.getAll()
-        ]);
-        const topActors = getTopActorsUtil(movies, roles, actors);
-        return topActors;
+        // const [actors, roles, movies] = await Promise.all([
+        //     getAll(),
+        //     rolesService.getAll(),
+        //     moviesService.getAll()
+        // ]);
+        // const topActors = getTopActorsUtil(movies, roles, actors);
+        const roles = await rolesService.getAll();
+        const topActorsIds = getTopActorsOptimazedUtil(roles);
+        const actorsIdsWithNames = [];
+        for (let i = 0; i < topActorsIds.pairs.length; i++) {
+            const firstActor = await getById(topActorsIds.pairs[i][0]);
+            const secondActor = await getById(topActorsIds.pairs[i][1]);
+
+            actorsIdsWithNames.push(
+                {
+                    pairIds: [1, 2],
+                    pairNames: [firstActor.FullName, secondActor.FullName]
+                }
+            );
+        }
+        return actorsIdsWithNames;
     } catch (error) {
         console.error(error.message)
         throw new Error(error.message);

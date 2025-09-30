@@ -30,10 +30,10 @@ export const getTopActorsUtil = (movies, roles, actors) => {
                         currentActorPair.commonMoviesNames.push(movieName);
                         currentActorPair.pairNames = [firsActorName, secondActorName];
                     } else {
-                        actorPairs.push({ 
-                            pairIds: [firstActorId, secondActorId], 
-                            commonMoviesCount: 1, 
-                            commonMovies: [m.ID] , 
+                        actorPairs.push({
+                            pairIds: [firstActorId, secondActorId],
+                            commonMoviesCount: 1,
+                            commonMovies: [m.ID],
                             pairNames: [firsActorName, secondActorName],
                             commonMoviesNames: [movieName]
                         });
@@ -48,4 +48,36 @@ export const getTopActorsUtil = (movies, roles, actors) => {
     actorPairs.forEach(ap => ap.commonMoviesCount === topActorsPairMoviesCount ? topActorPairs.push(ap) : null);
 
     return topActorPairs;
+};
+
+export const getTopActorsOptimazedUtil = (roles) => {
+  const movies = {};
+  for (const { ActorID, MovieID } of roles) {
+    
+    (movies[MovieID] ??= []).push(ActorID);
+  }
+
+  const pairCount = {};
+  let maxCount = 0;
+
+  for (const actors of Object.values(movies)) {
+    for (let i = 0; i < actors.length; i++) {
+      for (let j = i + 1; j < actors.length; j++) {
+        const [a, b] = actors[i] < actors[j] ? [actors[i], actors[j]] : [actors[j], actors[i]];
+        const key = `${a},${b}`;
+        const count = (pairCount[key] ?? 0) + 1;
+        pairCount[key] = count;
+        if (count > maxCount) maxCount = count;
+      }
+    }
+  }
+
+  const resultPairs = [];
+  for (const [key, count] of Object.entries(pairCount)) {
+    if (count === maxCount) {
+      resultPairs.push(key.split(",").map(Number));
+    }
+  }
+
+  return { pairs: resultPairs, moviesTogether: maxCount };
 };
