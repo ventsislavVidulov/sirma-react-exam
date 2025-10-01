@@ -7,22 +7,20 @@ import styles from "./ActorDetailsHeader.module.css";
 
 const ActorDetailsHeader = ({ details: { title: actorNameProp, actorId: actorIdProp, info: actorBirthDateProp }, editingHandler, editing  }) => {
     const [title, setTitle] = useState(actorNameProp);
-    const tempTitle = useRef('');
     const [date, setDate] = useState(actorBirthDateProp);
-    const tempDate = useRef('');
     const updateActorQuery = useUpdateActor(actorIdProp);
 
-    useEffect(() => {
-        console.log('use effect called');
+    // useEffect(() => {
+    //     console.log('use effect called');
         
-        if (editing) {
-            tempTitle.current = (title || actorNameProp);
-            tempDate.current = (date || actorBirthDateProp);
-        }
-    }, [editing, title, actorNameProp, date, actorBirthDateProp]);
+    //     if (editing) {
+    //         tempTitle.current = (title || actorNameProp);
+    //         tempDate.current = (date || actorBirthDateProp);
+    //     }
+    // }, [editing, title, actorNameProp, date, actorBirthDateProp]);
 
     const saveHandler = () => {
-        if (tempTitle.current.trim() || title) {
+        if (title.trim()) {
             const fetchUpdate = async () => {
                 if (editing) {
                     try {
@@ -42,12 +40,12 @@ const ActorDetailsHeader = ({ details: { title: actorNameProp, actorId: actorIdP
 
     const fieldChangeHandler = (e) => {
         e.preventDefault();
-        tempTitle.current = (e.target.value);
+        setTitle(e.target.value);
     };
 
     const dateChangeHandler = (e) => {
         e.preventDefault();
-        tempDate.current = (e.target.value);
+        setDate(e.target.value);
     }
 
     return (
