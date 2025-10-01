@@ -10,24 +10,12 @@ const ActorDetailsHeader = ({ details: { title: actorNameProp, actorId: actorIdP
     const [date, setDate] = useState(actorBirthDateProp);
     const updateActorQuery = useUpdateActor(actorIdProp);
 
-    // useEffect(() => {
-    //     console.log('use effect called');
-        
-    //     if (editing) {
-    //         tempTitle.current = (title || actorNameProp);
-    //         tempDate.current = (date || actorBirthDateProp);
-    //     }
-    // }, [editing, title, actorNameProp, date, actorBirthDateProp]);
-
     const saveHandler = () => {
         if (title.trim()) {
             const fetchUpdate = async () => {
                 if (editing) {
                     try {
-                        setTitle(tempTitle.current);
-                        setDate(tempDate);
-
-                        updateActorQuery.mutate({ FullName: tempTitle.current, BirthDate: tempDate.current });
+                        updateActorQuery.mutate({ FullName: title, BirthDate: date});
                     } catch (error) {
                         console.error(error.message);
                     }
