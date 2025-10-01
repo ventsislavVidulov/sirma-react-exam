@@ -58,7 +58,7 @@ const getTopActors = async () => {
 
             actorsIdsWithNames.push(
                 {
-                    pairIds: [1, 2],
+                    pairIds: [...topActorsIds.pairs],
                     pairNames: [firstActor.FullName, secondActor.FullName]
                 }
             );
