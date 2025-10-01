@@ -1,11 +1,11 @@
-import { useEffect, useState, useRef } from "react";
+import { useState } from "react";
 
 import { useUpdateActor } from "../../queries/actorsQuery/useUpdateActor";
 import { CustomButton, CustomFormFieldTitle, FaSave, FaGear, FaDelete, DateInput } from "../../ui";
 
 import styles from "./ActorDetailsHeader.module.css";
 
-const ActorDetailsHeader = ({ details: { title: actorNameProp, actorId: actorIdProp, info: actorBirthDateProp }, editingHandler, editing  }) => {
+const ActorDetailsHeader = ({ details: { title: actorNameProp, actorId: actorIdProp, info: actorBirthDateProp }, editingHandler, editing }) => {
     const [title, setTitle] = useState(actorNameProp);
     const [date, setDate] = useState(actorBirthDateProp);
     const updateActorQuery = useUpdateActor(actorIdProp);
@@ -15,7 +15,7 @@ const ActorDetailsHeader = ({ details: { title: actorNameProp, actorId: actorIdP
             const fetchUpdate = async () => {
                 if (editing) {
                     try {
-                        updateActorQuery.mutate({ FullName: title, BirthDate: date});
+                        updateActorQuery.mutate({ FullName: title, BirthDate: date });
                     } catch (error) {
                         console.error(error.message);
                     }
