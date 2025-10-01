@@ -8,25 +8,14 @@ import styles from "./MovieDetailsHeader.module.css";
 const MovieDetailsHeader = ({ details: { title: movieTitleProp, movieId: movieIdProp, info: movieReleaseDateProp } }) => {
     const [editing, setEditing] = useState(false);
     const [title, setTitle] = useState(movieTitleProp);
-    const tempTitle = useRef('');
     const [releaseDate, setReleaseDate] = useState(movieReleaseDateProp);
-    const tempReleaseDate = useRef('');
     const updateMovieQuery = useUpdateMovie(movieIdProp);
 
-    useEffect(() => {
-        if (editing) {
-            tempTitle.current = (title || movieTitleProp);
-            tempReleaseDate.current = (releaseDate || movieReleaseDateProp)
-        }
-    }, [editing, title, movieTitleProp, releaseDate, movieReleaseDateProp]);
-
     const saveHandler = () => {
-        if (tempTitle.current.trim() || title) {
+        if (title.trim()) {
             if (editing) {
                 try {
-                    setTitle(tempTitle.current);
-                    setReleaseDate(tempReleaseDate.current);
-                    updateMovieQuery.mutate({ Title: tempTitle.current, ReleaseDate: tempReleaseDate.current });
+                    updateMovieQuery.mutate({ Title: title, ReleaseDate: releaseDate });
                 } catch (error) {
                     console.error(error.message);
                 }
@@ -37,12 +26,12 @@ const MovieDetailsHeader = ({ details: { title: movieTitleProp, movieId: movieId
 
     const fieldChangeHandler = (e) => {
         e.preventDefault();
-        tempTitle.current = (e.target.value);
+        setTitle(e.target.value);
     };
 
     const dateChangeHandler = (e) => {
         e.preventDefault();
-        tempReleaseDate.current = (e.target.value);
+        setReleaseDate(e.target.value);
     };
 
     return (
